@@ -6,13 +6,93 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+  <meta name="description" content="操作系统期末总结第一章 操作系统概述一、基本概念1.操作系统：是一组能有效组织和管理计算机硬件和软件资源，合理地对各类作业进行调度，以及方便用户使用的程序（软件）的集合。 2.并发性：提高资源利用率、增加系统的吞吐量。 3.异步性：每个程序在何时执行，多个程序间的执行顺序以及完成每道程序所需的时间都是不确定的，因而也是不可预知的，即进程以不可预知的速度向前推进 ——由于资源等因素的限制，使进程的执">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2024/10/09/OS/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="操作系统期末总结第一章 操作系统概述一、基本概念1.操作系统：是一组能有效组织和管理计算机硬件和软件资源，合理地对各类作业进行调度，以及方便用户使用的程序（软件）的集合。 2.并发性：提高资源利用率、增加系统的吞吐量。 3.异步性：每个程序在何时执行，多个程序间的执行顺序以及完成每道程序所需的时间都是不确定的，因而也是不可预知的，即进程以不可预知的速度向前推进 ——由于资源等因素的限制，使进程的执">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20182713.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20183331.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20181625.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20181754.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20182313.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20212324.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20202820.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20200333.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20143341.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20143736.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20143915.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20142354.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20153126.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20202955.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20144554.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-24%20150802.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20104911.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20143148.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20182532.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20183138.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20183507.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20184125.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-26%20185903.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20134004.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142247.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142512.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142557.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142635.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142836.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142943.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20142955.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20143016.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20143100.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20144300.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20144312.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20144212.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20145006.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20145358.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20145902.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20145927.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20145942.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20150609.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20150624.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-01-01%20183050.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20192417.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20192453.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20194202.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20194222.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/image-20231227194306781.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20194935.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20195539.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20195627.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20195921.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20195955.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20200331.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20201127.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20201151.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20201213.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20201247.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20201321.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20201439.png">
+<meta property="og:image" content="http://example.com/OS.assets/0d745f4bfaffd3b3e4f608beda147ed.jpg">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20205659.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20205937.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20210646.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20210746.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20212129.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20211435.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20211511.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20211603.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20212333.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20213430.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20213450.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20213508.png">
+<meta property="og:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-27%20214144.png">
+<meta property="article:published_time" content="2024-10-09T11:45:26.116Z">
+<meta property="article:modified_time" content="2024-01-01T13:33:30.448Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/10/09/OS/OS.assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-12-19%20182713.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -67,9 +147,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-OS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-OS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/09/OS/" class="article-date">
   <time class="dt-published" datetime="2024-10-09T11:45:26.116Z" itemprop="datePublished">2024-10-09</time>
@@ -599,62 +677,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/09/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-10-09T11:12:50.381Z" itemprop="datePublished">2024-10-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/09/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2024/10/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/09/hello-world/" data-id="cm21t0t7k0000z0ub3o9318q0" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
