@@ -87,7 +87,11 @@
 <p>仓库名为：GitHub用户名/仓库名，例如：zhangsan/repo</p>
 <p>设定分支名选择main即可</p>
 <p>Token：输入上一步获取的Token即可</p>
-<p>剩余两个可以不填，或根据需求自行填写</p>
+<p>存储路径：在仓库中存储路径+文件名开头部分，可以不填<br>
+例如：</p>
+<p>​	test/test1:文件名为test1+原文件名，路径为main分支中test文件夹</p>
+<p>​	test/test1/：文件名为原文件名，路径为main分支中test/test1文件夹</p>
+<p>自定义域名不填即可</p>
 <div class="note pink info modern"><p>国内可能上传较慢，可以在自定义域名中填写：<a href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D">https://cdn.jsdelivr.net/gh/用户名/仓库名</a></p>
 </div>
 <p>配置完成后点击确定即可</p>
