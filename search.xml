@@ -164,6 +164,10 @@
 <h2 id="完成配置">完成配置</h2>
 <p>接下来就可以在markdown中插入图片自动实现压缩并上传图片到GitHub了，再也不用担心写好的文章上传博客图片加载丢失的问题了。</p>
 ]]></content>
+      <tags>
+        <tag>图床</tag>
+        <tag>Markdown</tag>
+      </tags>
   </entry>
   <entry>
     <title>test</title>
