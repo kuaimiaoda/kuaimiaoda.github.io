@@ -66,517 +66,99 @@
 ]]></content>
   </entry>
   <entry>
-    <title>操作系统期末总结</title>
-    <url>/OS/</url>
-    <content><![CDATA[<h1>操作系统期末总结</h1>
-<h2 id="第一章-操作系统概述">第一章 操作系统概述</h2>
-<h3 id="一、基本概念">一、基本概念</h3>
-<p>1.操作系统：是一组能有效组织和管理计算机硬件和软件资源，合理地对各类作业进行调度，以及方便用户使用的程序（软件）的集合。</p>
-<p>2.并发性：提高资源利用率、增加系统的吞吐量。</p>
-<p>3.异步性：每个程序在何时执行，多个程序间的执行顺序以及完成每道程序所需的时间都是不确定的，因而也是不可预知的，即进程以不可预知的速度向前推进</p>
-<p>——由于资源等因素的限制，使进程的执行方式为“走-停-走-停”，而不是“一气呵成“。</p>
-<h3 id="二、三种基本类型-OS-的主要特征？以及每种操作系统旨在解决的问题——产生的主要原因">二、三种基本类型 OS 的主要特征？以及每种操作系统旨在解决的问题——产生的主要原因</h3>
-<p>1.批处理操作系统</p>
-<p>​		特征：</p>
-<img src="OS.assets/屏幕截图 2023-12-19 182713.png" alt="屏幕截图 2023-12-19 182713" style="zoom:50%;" />
-<p>​		产生原因：有效地提高各类资源的利用率、提高系统吞吐量。</p>
-<p>2.分时系统</p>
-<p>​		特征：多路性、独立性、及时性、交互性</p>
-<p>​		产生原因：满足用户对人机交互的要求。</p>
-<p>3.实时系统</p>
-<p>​		特征：及时性、可靠性</p>
-<p>​		产生原因：将时间作为关键参数的任务能及时、可靠地得到处理。</p>
-<img src="OS.assets/屏幕截图 2023-12-19 183331.png" alt="屏幕截图 2023-12-19 183331" style="zoom: 50%;" />
-<h3 id="三、推动操作系统发展的因素有哪些？">三、推动操作系统发展的因素有哪些？</h3>
-<p>1.不断提高计算机资源利用率<br>
-2.方便用户<br>
-3.器件的不断更新换代<br>
-4.计算机系统结构的不断发展<br>
-5.不断提出新的应用需求</p>
-<h3 id="四、操作系统中使用哪些虚拟技术来提高资源的利用率？例如：虚拟-CPU、虚拟设备、虚拟内存如何实现。">四、操作系统中使用哪些虚拟技术来提高资源的利用率？例如：虚拟 CPU、虚拟设备、虚拟内存如何实现。</h3>
-<p>1.时分复用技术：利用某设备为一用户服务的空闲时间，又转去为其他用户服务，以提高设备利用率。</p>
-<p>​		（1）虚拟处理机技术：多道程序设计技术可将一台物理上的CPU虚拟成多台逻辑上的CPU。</p>
-<p>​		（2）虚拟设备技术：SPOOLing技术——虚拟I/O设备，将独占设备（临界资源）改造为“同时”访问的共享设备。</p>
-<p>2.空分复用技术：利用存储器的空闲空间，分区域存放和运行其他的多道程序，以此提高内存利用率。</p>
-<h3 id="五、计算题：已知每个作业的计算时间、I-O-时间，分别计算单道和多道情况下：每个作业的开始时间、完成时间及-CPU-的利用率。">五、计算题：已知每个作业的计算时间、I/O 时间，分别计算单道和多道情况下：每个作业的开始时间、完成时间及 CPU 的利用率。</h3>
-<img src="OS.assets/屏幕截图 2023-12-19 181625.png" alt="屏幕截图 2023-12-19 181625" style="zoom:50%;" />
-<img src="OS.assets/屏幕截图 2023-12-19 181754.png" alt="屏幕截图 2023-12-19 181754" style="zoom:50%;" />
-<img src="OS.assets/屏幕截图 2023-12-19 182313.png" alt="屏幕截图 2023-12-19 182313" style="zoom:50%;" />
-<h3 id="△-上课说的重点但大纲里没有的">△ 上课说的重点但大纲里没有的</h3>
-<h4 id="1-分时系统是如何实现交互性和及时性？">1.分时系统是如何实现交互性和及时性？</h4>
-<p>（1）作业<em><strong>直接进入内存</strong></em>，用户可通过键盘与内存中执行的作业进行交互，<em><strong>实现了交互性</strong></em>。</p>
-<p>（2）不允许一个作业长期占用CPU，规定每个作业只运行一个<em><strong>很短的时间（时间片）</strong></em>，然后便暂停该作业的运行，并且立即调度下一个作业运行，<em><strong>实现了及时性</strong></em>——时间片轮转。</p>
-<h4 id="2-批处理操作系统为何无交互性和及时性？">2.批处理操作系统为何无交互性和及时性？</h4>
-<p>（1）无交互性：用户作业先进入磁盘，有OS决定何时调入内存（作业调度），即使进入内存，也要经过等待才能获得CPU运行（进程调度），因此无法实现交互。</p>
-<p>（2）无及时性：若正在执行的作业是长作业，该作业会长期占用CPU，知道处理完毕或提出I/O请求时，才调度其他作业运行，因此无法使用户的请求得到及时的响应。</p>
-<h2 id="第二章-进程管理">第二章 进程管理</h2>
-<h3 id="一、名词解释">一、名词解释</h3>
-<p>1.临界区：每个进程中访问临界资源的那段代码称为临界区。</p>
-<p>2.临界资源：一次只允许一个进程访问的资源称为临界资源。典型的临界资源：打印机，磁带机等硬件设备，多进程共同访问的变量（共享变量）。</p>
-<p>3.进程：进程是进程实体的运行过程，是系统进行资源分配和调度的一个独立单位。</p>
-<h3 id="二、进程的三种基本状态，以及引起进程状态转换的事件">二、进程的三种基本状态，以及引起进程状态转换的事件</h3>
-<p>​	<strong>三种状态：</strong> 就绪状态、执行状态、阻塞状态</p>
-<p>​	<strong>状态转换事件：</strong></p>
-<p>​		就绪-&gt;执行：CPU调度分配到处理机</p>
-<p>​		执行-&gt;就绪：时间片到 或 其他更重要的进程抢占CPU（抢占式调度）</p>
-<p>​		执行-&gt;阻塞：等待某种事件（等待I/O完成、等待的资源出现）</p>
-<img src="OS.assets/屏幕截图 2023-12-19 212324.png" alt="屏幕截图 2023-12-19 212324" style="zoom:50%;" />
-<h3 id="三、记录型信号量与条件变量的比较（相同点和不同点）">三、记录型信号量与条件变量的比较（相同点和不同点）</h3>
-<img src="OS.assets/屏幕截图 2023-12-24 202820.png" alt="屏幕截图 2023-12-24 202820" style="zoom:67%;" />
-<h3 id="四、信号量-S-value-取值的含义">四、信号量 S.value 取值的含义</h3>
-<p>该资源S当前可用数量</p>
-<p>（1） &gt;0：表示还有 S.value 个可供分配的资源，没有等待资源的进程</p>
-<p>（2）=0：表示没有可供分配的资源，也没有等待资源的进程</p>
-<p>（3）&lt;0：表示没有可供分配的资源，等待资源的进程数量为|S.value|</p>
-<h3 id="五、生产者-消费者问题可以使用信号量机制实现，也可以使用管程机制实现，两种实现方式的区别是什么？">五、生产者-消费者问题可以使用信号量机制实现，也可以使用管程机制实现，两种实现方式的区别是什么？</h3>
-<p>**传统信号量机制：**从进程本身出发，哪个进程要使用共享（临界）资源，则自己准备相应的同步原语</p>
-<p>**管程机制：**从资源角度出发，为共享资源准备好所有可能的同步操作（管程）。使用共享资源的进程仅需调用资源准备好的操作，即可面向对象思想。</p>
-<img src="OS.assets/屏幕截图 2023-12-24 200333.png" alt="屏幕截图 2023-12-24 200333" style="zoom:67%;" />
-<h3 id="六、PV-原语：使用-wait-原语和-signal-原语实现进程同步">六、PV 原语：使用 wait 原语和 signal 原语实现进程同步</h3>
-<h4 id="1-实现进程互斥">1.实现进程互斥</h4>
-<p>多个进程<strong>互斥</strong>访问临界资源</p>
-<p>​	（1）为需要互斥访问的<strong>每类临界资源</strong>（共享变量）设置相应的信号量一称为互斥信号量。</p>
-<p>​	（2）因临界资源只允许一个进程访问，因此信号量的<strong>初始值为1</strong>。</p>
-<p>​	（3）确定临界区及剩余区</p>
-<p>​	（4）在临界区前面添加进入区代码：wait(信号量)</p>
-<p>​	（5）在临界区前面添加退出区代码为：signal(信号量)</p>
-<p>​	（6）为保证系统的并发度，一定将与临界资源无关的代码放到剩余区。</p>
-<p>例子：</p>
-<img src="OS.assets/屏幕截图 2023-12-24 143341.png" alt="屏幕截图 2023-12-24 143341" style="zoom:67%;" />
-<h4 id="2-描述前趋图">2.描述前趋图</h4>
-<p><em><strong>方法：</strong></em></p>
-<p>​	（1）为前趋图中的每一个有向边设置一个信号量，并初始化为0。</p>
-<p>​	（2）将每个结点设计成一个进程，每个进程的结构</p>
-<p>​			（a）先对进入该结点的每个有向边对应的信号量分别执行wait操作，没有可略。</p>
-<p>​			（b）执行该结点操作，表示为S。</p>
-<p>​			（c）对离开该结点的每个有向边的信号量分别执行signal操作，没有可略。</p>
-<p>​		此步例子：</p>
-<p>​			<img src="OS.assets/屏幕截图 2023-12-24 143736.png" alt="屏幕截图 2023-12-24 143736" style="zoom: 50%;" /></p>
-<p>描述前趋图例子：</p>
-<img src="OS.assets/屏幕截图 2023-12-24 143915.png" alt="屏幕截图 2023-12-24 143915" style="zoom:67%;" />
-<h4 id="3-生产者-消费者问题（合作）">3.生产者-消费者问题（合作）</h4>
-<p>信号量：s_empty空缓冲区消息信号量；s_item有产品的缓冲区消息信号量</p>
-<img src="OS.assets/屏幕截图 2023-12-24 142354.png" alt="屏幕截图 2023-12-24 142354" style="zoom: 67%;" />
-<p>带读写指针（循环队列）：</p>
-<p>​	s为读写指针（互斥信号量），另一种方法可以将读写指针分别设为一个信号量。</p>
-<img src="OS.assets/屏幕截图 2023-12-24 153126.png" alt="屏幕截图 2023-12-24 153126" style="zoom:67%;" />
-<h4 id="4-哲学家进餐问题">4.哲学家进餐问题</h4>
-<img src="OS.assets/屏幕截图 2023-12-24 202955.png" alt="屏幕截图 2023-12-24 202955" style="zoom:67%;" />
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">semaphore ck[<span class="number">5</span>]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">p</span><span class="params">(<span class="type">int</span> i)</span><span class="comment">/*i代表第i个哲学家，取值0,1,2,3,4*/</span></span><br><span class="line">&#123;L1:</span><br><span class="line">	wait(ck[i]);</span><br><span class="line">	wait(ck(+<span class="number">1</span>)%<span class="number">5</span>)</span><br><span class="line">        ……</span><br><span class="line">	eat;</span><br><span class="line"> 		……</span><br><span class="line">	signal(ck[i]);</span><br><span class="line">	signal(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">	think</span><br><span class="line">	<span class="keyword">goto</span> L1;</span><br><span class="line">&#125;<span class="comment">/*此法保证了互斥使用，但可能死锁*/</span></span><br></pre></td></tr></table></figure>
-<p>**· ** 如何设计一个不会死锁的哲学家进餐问题？</p>
-<p>​	（1）至多只允许4位哲学家进餐。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*设置记录型信号量sm来限制同时进餐的哲学家数目；信号量的初始值为4*/</span></span><br><span class="line">semaphore ck[<span class="number">5</span>]=&#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">semaphore sm=<span class="number">4</span>; <span class="comment">// sm称为资源信号量</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">p</span><span class="params">(<span class="type">int</span> i)</span><span class="comment">/*i=0,1,2,3,4*/</span></span><br><span class="line">&#123;L1:</span><br><span class="line"> 	wait(sm);<span class="comment">//申请位置</span></span><br><span class="line">    wait(ck[i]);</span><br><span class="line"> 	wait(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">    eat;</span><br><span class="line">    signal(ck[i]);</span><br><span class="line">    signal(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">    signal(sm);<span class="comment">//释放位置</span></span><br><span class="line">    think;</span><br><span class="line">    <span class="keyword">goto</span>	L1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​	（2）仅当哲学家左右两边的筷子都可用时，才允许他拿起左右筷子进餐，否则一根筷子也不拿。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*用AND型信号量实现*/</span></span><br><span class="line">semaphore ck[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">void</span> <span class="title function_">p</span><span class="params">(<span class="type">int</span> i)</span><span class="comment">/*i=1,2,3,4,5*/</span></span><br><span class="line">&#123;</span><br><span class="line">    Swait(ck[i],ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">    eat;</span><br><span class="line">    Ssignal(ck[i],ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">    think;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 将左右筷子作为一个整体，互斥取筷子</span></span><br><span class="line"><span class="comment">当一个哲学家取筷子，其他哲学家不能取筷子，互斥。*/</span></span><br><span class="line">semaphore ck[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">semaphore mutex = <span class="number">1</span>; <span class="comment">// 实现取筷子的互斥</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">p</span><span class="params">(<span class="type">int</span> i)</span><span class="comment">/*i=0,1,2,3,4*/</span></span><br><span class="line">&#123;</span><br><span class="line">    wait(mutex); <span class="comment">// 申请使用筷子</span></span><br><span class="line">    wait(ck[i]);</span><br><span class="line">    wait(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">    signal(mutex); <span class="comment">// 取完筷子</span></span><br><span class="line">    eat;</span><br><span class="line">    signal(ck[i]);</span><br><span class="line">    signal(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">    think;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>​	（3）规定奇数号哲学家先拿左边的筷子，再拿右边的筷子；偶数号哲学家先拿右边的筷子，再拿左边的筷子。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">semaphore ck[<span class="number">5</span>]=<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">p</span><span class="params">(inti)</span><span class="comment">/*i=0,1,2,3,4*/</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>) <span class="comment">// 偶数号哲学家，先右后左</span></span><br><span class="line">    &#123;</span><br><span class="line">        wait(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">		wait(ck[i]);</span><br><span class="line">		eat;</span><br><span class="line">		signal(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">		signal(ck[i]);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="comment">// 奇数号哲学家，先左后右</span></span><br><span class="line">	&#123;</span><br><span class="line">    	wait(ck[i]);</span><br><span class="line">		wait(ck[(i+<span class="number">1</span>)%<span class="number">5</span>);</span><br><span class="line">		eat;</span><br><span class="line">		signal(ck[i]);</span><br><span class="line">		signal(ck[(i+<span class="number">1</span>)%<span class="number">5</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="5-读者-写者问题">5.读者-写者问题!</h4>
-<p>网络环境下，共享一个文件F的规则为：</p>
-<p>​	（1）多个读者进程可以同时访问共享文件F。</p>
-<p>​	（2）任一个写者进程访问共享文件F时，其它读进程或写进程不允许对该共享文件F进行访问（互斥）。</p>
-<p>​	（3）当有读进程使用文件时，不允许写进程访问文件。</p>
-<p>读者一写者研究的主要问题：如何保证一个写进程必须与其它写进程或读进程互斥、而读进程可同时访问一个共享对象的同步问题。</p>
-<p>(1)  <strong>读者优先</strong> 进程设计</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*文件F是每个写着互斥访问的资源，设计互斥信号量fmutex，置初值为1*/</span></span><br><span class="line">semaphore fmutex=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> readcount=<span class="number">0</span>;</span><br><span class="line">semaphore rmutex=<span class="number">1</span>; <span class="comment">// readcount的互斥</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">writeri</span><span class="params">()</span> <span class="comment">// i=1,2,3,4……</span></span><br><span class="line">&#123;L1:  <span class="comment">// 写者进程</span></span><br><span class="line">    wait(fmutex);</span><br><span class="line">    写文件；</span><br><span class="line">    signal(fmutex);</span><br><span class="line">    <span class="keyword">goto</span> L1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">readerj</span><span class="params">()</span> <span class="comment">// j=1,2,3,……</span></span><br><span class="line">&#123;L2：  <span class="comment">// 读者进程</span></span><br><span class="line">    wait(rmutex);</span><br><span class="line">    <span class="keyword">if</span>(readcount==<span class="number">0</span>)wait(fmutex); <span class="comment">// 若是第一个读者，申请文件</span></span><br><span class="line">    readcount++;</span><br><span class="line"> 	signal(rmutex);</span><br><span class="line">    读文件F;</span><br><span class="line"> 	wait(rmutex);</span><br><span class="line">    readcount--; <span class="comment">// 每个退出的读者修改计数</span></span><br><span class="line">    <span class="keyword">if</span>(readcount==<span class="number">0</span>)signal(fmutex); <span class="comment">// 若是最后一个读者，释放文件</span></span><br><span class="line"> 	signal(rmutex);</span><br><span class="line">    <span class="keyword">goto</span> L2；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>(2) <strong>读者、写者平等</strong> 进程设计——按照先来先服务的原则执行</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="雨课堂练习题">雨课堂练习题</h4>
-<p>（1）桌上有一空盘，允许存放一个水果。爸爸可向盘中放苹果，妈妈可向盘中放桔子。女儿专等吃盘中的苹果，儿子专等吃盘中的桔子。只要盘子空爸爸或妈妈可向盘中放一个水果。用PV操作进行管理使他们能正确地执行。</p>
-<img src="OS.assets/屏幕截图 2023-12-24 144554.png" alt="屏幕截图 2023-12-24 144554" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-24 150802.png" alt="屏幕截图 2023-12-24 150802" style="zoom:67%;" />
-<p>（2）有一个阅览室，读者进入时必须在一张登记表上列出一个表日。读者离开时，要撤消登记表信息，假定阅览室有100个座位，并且任何时刻只允许一个人使用登记表。试用wait和signal操作描述上述过程。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">semaphore sm=<span class="number">100</span>;/资源信号量，控制并发度</span><br><span class="line">semaphore mutex=<span class="number">1</span>;/登记表互斥使用</span><br><span class="line"><span class="type">void</span> <span class="title function_">reader</span><span class="params">()</span></span><br><span class="line">&#123;L1:</span><br><span class="line"> 	wait(sm); <span class="comment">// 是否有位置</span></span><br><span class="line">	wait(mutex); <span class="comment">// 申请登记表</span></span><br><span class="line">	填写登记表；</span><br><span class="line">	signal(mutex); <span class="comment">// 释放登记表</span></span><br><span class="line">	进入图书馆学习；</span><br><span class="line">	wait(mutex); <span class="comment">// 申请登记表</span></span><br><span class="line">	撤销登记表；</span><br><span class="line">	signal(mutex); <span class="comment">// 释放登记表</span></span><br><span class="line">	signal(sm); <span class="comment">// 释放位置</span></span><br><span class="line">	<span class="keyword">goto</span> L1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="七、分析线程切换时，需不需要修改相应的内存管理数据结构（空闲分区表、页表、段表等）">七、分析线程切换时，需不需要修改相应的内存管理数据结构（空闲分区表、页表、段表等）</h3>
-<p>内存资源的分配是以线程为单位进行，因此<strong>同一个进程中的不同线程</strong>共享该进程的（内存）资源，即在同一段内存区域中，线程切换时<strong>不需要修改</strong>内存区域信息；而不同进程占用不同的内存区域，因此<strong>不同进程</strong>中线程进行切换时，<strong>需要修改</strong>指令和数据所在内存空间。</p>
-<h3 id="△-上课说的重点但大纲里没有的-2">△ 上课说的重点但大纲里没有的</h3>
-<p>1.为什么说PCB是进程存在的唯一标志？</p>
-<p>（1)创建进程时，系统要创建一个空白PCB。</p>
-<p>（2）进程调度时：根据PCB中的进程描述信息来选择运行的进程，将老进程的现场信息保存到其PCB中，从新进程的PCB中取出信息来恢复该进程的运行现场。</p>
-<p>（3）执行中的进程：通过PCB与其他进程进行同步和通信。</p>
-<p>（4）进程阻塞：将当前进程的现场信息记PCB中，并修改该进程的状态。</p>
-<p>（5）进程撤销时：系统撤消该进程的PCB。</p>
-<p>因此，在进程的整个生命周期中，都是通过PCB对进程进行管理和控制，所以说，PCB是进程存在的唯一标志。</p>
-<h2 id="第三章-处理机调度与死锁">第三章 处理机调度与死锁</h2>
-<h3 id="一、名词解释-2">一、名词解释</h3>
-<p>1.<strong>周转时间</strong>：从用户作业被提交给系统开始，到作业完成为止的这段时间。</p>
-<p>2.<strong>响应时间</strong>：用户从键盘提交一个请求开始，知道屏幕上显示出处理结果为止的一段时间。</p>
-<p>3.<strong>安全状态</strong>：能找到一个<strong>安全序列</strong>，说明系统处于安全状态。</p>
-<p>安全序列：能找到某种进程推进顺序，按照这个顺序为每个进程分配资源，则能够满足系统中所有的进程的资源需求。</p>
-<p>4.<strong>不安全状态</strong>：找不到<strong>安全序列</strong>，说明系统处于不安全状态。</p>
-<p>5.<strong>死锁</strong>：一组进程中的每一个进程都在等待仅由该组进程中的其他进程才能引发的事件。多个进程在运行过程中因</p>
-<p>争夺资源而造成的一种僵局，当进程处于这种僵持状态时，若无外力作用，它们都将无法再向前推进。</p>
-<p>死锁的<strong>产生原因</strong>：竞争不可抢占性资源、竞争可消耗资源引起死锁、进程推进顺序不当。</p>
-<p>死锁产生的<strong>必要条件</strong>：互斥条件、请求和保持条件、不可剥夺条件、环路等待条件。</p>
-<h3 id="二、为什么说高响应比优先作业调度算法是当前最好的作业调度算法？">二、为什么说高响应比优先作业调度算法是当前最好的作业调度算法？</h3>
-<p>1.如果作业的等待时间相同，则服务时间越短，其响应比（优先级）越高，类似于SJF算法，有利用短作业。</p>
-<p>2.当服务时间相同时，作业的响应比取决于等待时间，因而该算法又类似于FCFS算法</p>
-<p>3.对于长作业（服务时间长）的优先级，可以随等待时间的增加而提高，当等待时间足够长时，就会获得CPU,避免饥饿。</p>
-<p><strong>缺点</strong>：每次调度之前，需要对后备对列中每个作业的响应比进行计算，增加系统的开销。</p>
-<h3 id="三、为什么说多级反馈队列调度算法能够全面考虑各种作业类型？">三、为什么说多级反馈队列调度算法能够全面考虑各种作业类型？</h3>
-<img src="OS.assets/屏幕截图 2023-12-26 104911.png" alt="屏幕截图 2023-12-26 104911" style="zoom:67%;" />
-<h3 id="四、根据三种基本操作系统的目标，系统应该设计那种进程调度算法满足其目标的实现？为什么这样设计。">四、根据三种基本操作系统的目标，系统应该设计那种进程调度算法满足其目标的实现？为什么这样设计。</h3>
-<h4 id="1-批处理操作系统：">1.批处理操作系统：</h4>
-<p>目标：平均周转时间短、系统吞吐量高、处理机利用率高</p>
-<p>旨在提高资源利用率和系统吞吐量，因此为了照顾为数众多的短作业，应采用短作业优先调度算法。</p>
-<h4 id="2-分时系统">2.分时系统</h4>
-<p>目标：响应时间快、均衡性</p>
-<p>旨在实现交互性和及时响应用户请求，因此通常采用时间片轮转的调度算法。</p>
-<h4 id="3-实时系统">3.实时系统</h4>
-<p>目标：截止时间的保证、可预测性</p>
-<p>旨在保证紧急任务能等到及时处理，通常采用抢占式的高优先权优先调度算法。</p>
-<h3 id="五、作业调度算法、进程调度算法的综合应用：计算作业的开始时间、进入内存时间、完成时间、周转时间、带权周转时间、平均周转时间、平均带权周转时间">五、作业调度算法、进程调度算法的综合应用：计算作业的开始时间、进入内存时间、完成时间、周转时间、带权周转时间、平均周转时间、平均带权周转时间</h3>
-<h3 id="六、银行家算法应用：已知MAX矩阵、ALLOCATION矩阵、初始资源数量">六、银行家算法应用：已知MAX矩阵、ALLOCATION矩阵、初始资源数量</h3>
-<p>设每个资源类的初始单元数量为A矩阵</p>
-<p>1.计算NEED矩阵：Need[i,j] = Max[i,j] - Allocation[i,j]</p>
-<p>2.计算AVAILABLE数组: Available[j] = A[j] - sum_i(Allocation[i,j])</p>
-<p>3.判断当前状态是否安全？——使用安全性算法</p>
-<p>4.当进程提出资源请求时，是否满足该进程的请求？——银行家算法计算</p>
-<h3 id="七、利用银行家算法保证系统绝对安全">七、利用银行家算法保证系统绝对安全</h3>
-<p>n 为进程数，x 为每个进程需要的最多资源数、m为资源的总数：n(x-1)+1&lt;=m</p>
-<h2 id="第四章-存储器管理">第四章 存储器管理</h2>
-<h3 id="一、名词解释-3">一、名词解释</h3>
-<p>重定位：将用户程序中使用的<strong>逻辑地址</strong>修正为在内存中实际存储的<strong>物理（内存）地址</strong>。</p>
-<h3 id="二、连续分配方式——动态分区分配算法">二、连续分配方式——动态分区分配算法</h3>
-<p>1.实现的基本原理：在作业要求装入主存时，根据作业需要的主存量和当时主存空间使用情况来决定是否可以装入该作业——主要内存空间允许，就可以将作业装入内存。</p>
-<p>2 .使用的数据结构：空闲分区表、使用分区表（作业做完了回收空间时使用）</p>
-<img src="OS.assets/屏幕截图 2023-12-26 143148.png" alt="屏幕截图 2023-12-26 143148" style="zoom:67%;" />
-<p>3 .动态分区分配算法——为作业选择空闲分区的算法：首次适应算法、最佳适应算法</p>
-<p>（1）基于顺序搜索的动态分区分配算法（速度慢）</p>
-<p>①首次适应算法FF</p>
-<p>②循环首次适应算法</p>
-<p>③最佳适应算法</p>
-<p>④最坏适应算法</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>登记顺序</th>
-<th>查找特点</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>首次适应算法</td>
-<td><strong>起始地址从小到大</strong>顺序</td>
-<td>从第一个空闲分区开始找</td>
-<td>优先利用内存中低地址的空闲区，<strong>保留高地址</strong>的大空闲区</td>
-<td>低地址部分呗不断分割，留下很小的空闲区域；每次从低地址开始，增加系统时间开销</td>
-</tr>
-<tr>
-<td>循环首次适应算法</td>
-<td>不按任何顺序</td>
-<td>从<strong>上次找到的分区的下一个分区</strong>开始查找，若最后一个也没找到，回到第一个分区继续查找</td>
-<td>内存被划分地比较<strong>均匀</strong>，减少时间开销</td>
-<td>缺乏大的空间区域</td>
-</tr>
-<tr>
-<td>最佳适应算法</td>
-<td>按空闲区域<strong>大小递增</strong>顺序</td>
-<td>从第一个空闲分区开始找</td>
-<td>总能把<strong>满足要求又是最小</strong>的空闲区域分配给作业</td>
-<td>产生很多难以使用的“碎片”</td>
-</tr>
-<tr>
-<td>最坏适应算法</td>
-<td>按空闲分区<strong>大小递减</strong>顺序</td>
-<td>从第一个空闲分区开始找</td>
-<td><strong>剩余的空闲区不会太小</strong>，产生碎片的可能性最小；<strong>查找效率高</strong>，每次只看第一个空闲区即可</td>
-<td>缺乏大的空闲空间，堆场作业不利</td>
-</tr>
-</tbody>
-</table>
-<p>（2）基于索引搜索的动态分区分配算法（速度快但不考[emoji]）</p>
-<p>4 .给出内存分配情况（例如：有几个空闲区、每个空闲区的起始地址、大小；每个作业在内存的起始地址）</p>
-<p>5.（大纲没有）回收过程</p>
-<p>（1）回收空间上面有一个空闲分区——合并分区，空闲区数量不变</p>
-<p>（2）回收空间下面有一个空闲分区——合并分区，空闲区数量不变</p>
-<p>（3）上下都有——合并分区，空闲区数量-1</p>
-<p>（4）上下都没有——空闲区数量+1</p>
-<h3 id="三、基本分页系统——访问数据需要访问-2-次内存">三、基本分页系统——访问数据需要访问 2 次内存</h3>
-<p>1.根据逻辑地址的长度，确定作业空间的大小，或根据作业空间的大小，确定逻辑地址的长度</p>
-<p>2.逻辑地址到物理地址的转换（16 进制）——由<strong>硬件地址转换机构</strong>转换（动态重定位）</p>
-<p>（大纲没有）</p>
-<p>3.基本原理：</p>
-<img src="OS.assets/屏幕截图 2023-12-26 182532.png" alt="屏幕截图 2023-12-26 182532" style="zoom:67%;" />
-<p>4.数据结构：页表——页号（按顺序存放、可省略）、块号、存取控制</p>
-<h3 id="四、具有快表的分页系统（先访问快表、再访问页表）">四、具有快表的分页系统（先访问快表、再访问页表）</h3>
-<p>1.在快表中存储最近访问的数据或指令，可提高存取效率的依据——局部性原理</p>
-<p>2.访问内存的有效时间——引入快表前后，读取一个数据平均时间的变化（不考虑更新快表的时间）</p>
-<p>（1）命中的：一次快表（取物理块号）+一次内存（读取数据）</p>
-<p>（2）没命中的：一次快表+一次内存（页表中找物理块号）+一次内存（读取数据）</p>
-<p>例题：</p>
-<img src="OS.assets/屏幕截图 2023-12-26 183138.png" alt="屏幕截图 2023-12-26 183138" style="zoom:67%;" />
-<h3 id="五、多级页表">五、多级页表</h3>
-<p>1.访问一个数据需要访问内存多少次？例如 2 级页表需要访问 3 次内存</p>
-<p>2.以 2 级页表为例，给定逻辑地址 A（16 进制），能将其转换为外层页表号（组号）、内层页表号（组内位移）</p>
-<p>及页内位移。</p>
-<p>（1）根据页面大小划分页内位移位数、页号位数</p>
-<p>（2） 若给定物理块大小和每个页表项长度，则优先满足组内位移位数，剩余为外层页号；若没有给出物理块大小和每个页表项长度，则组号和组内位移平分页号的位数。</p>
-<p>3.给定逻辑地址的外层页号、内层页号和页内位移，求其逻辑地址是多少（16 进制表示即可）？</p>
-<p>雨课堂上的题：</p>
-<img src="OS.assets/屏幕截图 2023-12-26 183507.png" alt="屏幕截图 2023-12-26 183507" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-26 184125.png" alt="屏幕截图 2023-12-26 184125" style="zoom:67%;" />
-<h3 id="六、分段系统">六、分段系统</h3>
-<p>1.逻辑地址（二维）到物理地址的转换，读取数据需要访问 2 次内存</p>
-<p>2.分段系统的逻辑地址空间中，若给出段号占用的字节数，则剩余位数就是段内位移的位数，可确定该系统分段的最大长度。</p>
-<p>（以下内容大纲上没有）</p>
-<p>3.数据结构：段表——段号（按顺序存）、始址、段长（每段长度不等）、存取控制</p>
-<p>雨课堂上的题：</p>
-<img src="OS.assets/屏幕截图 2023-12-26 185903.png" alt="屏幕截图 2023-12-26 185903" style="zoom:67%;" />
-<p>绝对地址 = 段基址 + 段内位移  （前提：段内位移不超过段长，否则不合法）</p>
-<h3 id="七、分页系统中正在执行进行的页表起始地址及长度存在页表寄存器中，在该寄存器中除了存放页表起始地址，还存储页表的长度有何作用？">七、分页系统中正在执行进行的页表起始地址及长度存在页表寄存器中，在该寄存器中除了存放页表起始地址，还存储页表的长度有何作用？</h3>
-<p>存储页表的长度用于判断指令中逻辑地址的合法性，若逻辑地址划分出的逻辑页号&gt;=页表长度，则可认定为该逻辑地址非法。</p>
-<h2 id="第五章-虚拟存储器">第五章 虚拟存储器</h2>
-<h3 id="一、根据进程分配到的数据块数（固定、可变）和缺页时的置换范围（局部、全局），系统可采用的内存分配策略有哪些？">一、根据进程分配到的数据块数（固定、可变）和缺页时的置换范围（局部、全局），系统可采用的内存分配策略有哪些？</h3>
-<p>![屏幕截图 2023-12-26 212310](OS.assets/屏幕截图 2023-12-26 212310.png)</p>
-<h3 id="二、根据物理块数、访问页面数、页面访问序列等，确定页面置换算法缺页率的上限和下限。">二、根据物理块数、访问页面数、页面访问序列等，确定页面置换算法缺页率的上限和下限。</h3>
-<h3 id="三、页面置换算法：分析缺页次数、缺页率、置换的页面序列">三、页面置换算法：分析缺页次数、缺页率、置换的页面序列</h3>
-<p>1.最佳置换算法</p>
-<p>2.先进先出（会出现 Belady 现象：分配物理块数多了，缺页率不降反升）</p>
-<p>3.最近最久未访问</p>
-<p>4.简单的 CLOCK 置换算法：仅考虑访问位</p>
-<p>5.改进的 CLOCK 置换算法：同时考虑访问位和修改位</p>
-<h3 id="四、访问内存的有效时间的计算：综合考虑快表命中率、缺页率、置换的是否是修改页面等因素进行访问内存数据有效时间的计算，或给出要满足的有效时间，计算快表命中率、缺页率等参数">四、访问内存的有效时间的计算：综合考虑快表命中率、缺页率、置换的是否是修改页面等因素进行访问内存数据有效时间的计算，或给出要满足的有效时间，计算快表命中率、缺页率等参数</h3>
-<h3 id="五、给定逻辑地址转换成物理地址（16-进制）（主要是请求分页系统）：">五、给定逻辑地址转换成物理地址（16 进制）（主要是请求分页系统）：</h3>
-<p>1.不缺页：同第四章的基本分页的地址转换过程</p>
-<p>2.缺页：看是否还有空闲的盘块，若有则将该页装入该空闲盘块后，继续进行地址转换；若没有空闲盘块则提示“缺页”</p>
-<p>3.逻辑地址非法：页号&gt;=页表长度（在页表寄存器中存放），则提示“逻辑地址非法”</p>
-<h3 id="六、程序编制方法对缺页率的影响。例如：数组的按行赋值和按列赋值">六、程序编制方法对缺页率的影响。例如：数组的按行赋值和按列赋值</h3>
-<h3 id="七、根据-CPU-的利用率和对换盘的使用效率，分析是否可以通过增加多道程序度来进一步提高-CPU-的利用率">七、根据 CPU 的利用率和对换盘的使用效率，分析是否可以通过增加多道程序度来进一步提高 CPU 的利用率</h3>
-<h2 id="第六章-设备管理">第六章 设备管理</h2>
-<h3 id="一、名词解释-4">一、名词解释</h3>
-<p>虚拟设备：把一个物理设备变换成多个逻辑上的设备。</p>
-<h3 id="二、I-O-设备按信息交换的单位分类">二、I/O 设备按信息交换的单位分类</h3>
-<p>1.<strong>块设备</strong>：存储型设备、有结构、可随机读写；典型设备：磁盘；驱动方式为：DMA方式、通道方式。</p>
-<p>2.<strong>字符设备</strong>：I/O 设备、无结构、不可寻址；典型设备：交互式终端；驱动方式为：中断驱动方式。</p>
-<img src="OS.assets/屏幕截图 2023-12-27 134004.png" alt="屏幕截图 2023-12-27 134004" style="zoom:67%;" />
-<h3 id="三、分析-I-O-控制方式的发展历程中，OS-是如何从繁杂的-I-O-工作中解脱出来？轮询——中断——DMA——通道。">三、分析 I/O 控制方式的发展历程中，OS 是如何从繁杂的 I/O 工作中解脱出来？轮询——中断——DMA——通道。</h3>
-<p>![屏幕截图 2023-12-27 134902](OS.assets/屏幕截图 2023-12-27 134902.png)</p>
-<p>![屏幕截图 2023-12-27 134415](OS.assets/屏幕截图 2023-12-27 134415.png)</p>
-<h3 id="四、如何实现打印机的共享（即虚拟打印机是如何实现的）假脱机技术（Spooling技术）">四、如何实现打印机的共享（即虚拟打印机是如何实现的）假脱机技术（Spooling技术）</h3>
-<h4 id="1-Spooling定义">1.Spooling定义</h4>
-<p>Spooling技术是一种<strong>以空间换时间</strong>的技术：开辟输入/输出井。内存缓冲区，以换取资源利用率的提高。</p>
-<h4 id="2-Spooling的实现">2.Spooling的实现</h4>
-<p>通过Spooling技术，可将一台物理I/O设备虚拟为多台逻辑I/O设备，即<strong>将一台独占设备虚拟为共享设备</strong>，从而实现允许多个用户<strong>共享一台独占设备</strong>（例如：打印机）。</p>
-<h4 id="3-Spooling的系统组成">3.Spooling的系统组成</h4>
-<p>（1）输入/输出井</p>
-<p>（2）输入/输出缓冲区</p>
-<p>（3）输入/输出进程</p>
-<p>（4）井管理程序</p>
-<h4 id="4-如何实现打印机共享">4.如何实现打印机共享</h4>
-<p>![屏幕截图 2023-12-27 141338](OS.assets/屏幕截图 2023-12-27 141338.png)</p>
-<h4 id="5-Spooling的特点">5.Spooling的特点</h4>
-<p>（1）<strong>提高了I/O速度</strong>：与<strong>CPU关联</strong>实现I/O操作的是高速磁盘（输入井、输出井），因此提高了I/O速度，<strong>缓解</strong>了I/O设备和CPU<strong>速度不匹配的矛盾</strong>，提高CPU的利用率。</p>
-<p>（2）<strong>将独占设备改造为共享设备</strong>，其实现方法（※）</p>
-<p>​		①当进程请求独占设备时，系统并<strong>不是</strong>将独占设备<strong>立即分配</strong>给该进程，而是完成两个任务：</p>
-<p>​				a）<strong>数据传送到</strong>磁盘缓冲区（输入/输出<strong>井</strong>）中</p>
-<p>​				b）为该进程申请空白的I/O请求表，I/O请求的信息及数据在输入/输出井中位置填入表中，将该申请表挂到假脱机文件请求<strong>队列排队</strong>。</p>
-<p>​		②当真正排到该进程时，才把设备真正分配给该进程，完成本次I/O任务。</p>
-<p>（3）<strong>实现虚拟设备功能</strong>：将独占设备变换为若干台对应的逻辑设备。</p>
-<h4 id="6-Spooling如何将独占设备改造为共享设备">6.Spooling如何将独占设备改造为共享设备</h4>
-<p>​	见5的（2）</p>
-<h3 id="五、设备独立性的实现">五、设备独立性的实现</h3>
-<p>使用 LUT（逻辑设备表）逻辑设备名到物理设备名的映射。</p>
-<h3 id="六、单缓冲、双缓冲情况下，一组数据块处理时间的计算">六、单缓冲、双缓冲情况下，一组数据块处理时间的计算</h3>
-<h4 id="1-单缓冲区">1.单缓冲区</h4>
-<img src="OS.assets/屏幕截图 2023-12-27 142247.png" alt="屏幕截图 2023-12-27 142247" style="zoom:67%;" />
-<p>计算原理：</p>
-<img src="OS.assets/屏幕截图 2023-12-27 142512.png" alt="屏幕截图 2023-12-27 142512" style="zoom:67%;" />
-<p>课上例题：</p>
-<img src="OS.assets/屏幕截图 2023-12-27 142557.png" alt="屏幕截图 2023-12-27 142557" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 142635.png" alt="屏幕截图 2023-12-27 142635" style="zoom:67%;" />
-<h4 id="2-双缓冲区">2.双缓冲区</h4>
-<img src="OS.assets/屏幕截图 2023-12-27 142836.png" alt="屏幕截图 2023-12-27 142836" style="zoom:67%;" />
-<p>课上例题：</p>
-<img src="OS.assets/屏幕截图 2023-12-27 142943.png" alt="屏幕截图 2023-12-27 142943" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 142955.png" alt="屏幕截图 2023-12-27 142955" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 143016.png" alt="屏幕截图 2023-12-27 143016" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 143100.png" alt="屏幕截图 2023-12-27 143100" style="zoom:67%;" />
-<p>正确答案B</p>
-<h3 id="七、磁盘系统的结构：柱面号（磁道号）、磁头（盘面号）、扇区——各种编号均从-0-开始">七、磁盘系统的结构：柱面号（磁道号）、磁头（盘面号）、扇区——各种编号均从 0 开始</h3>
-<p>磁盘系统结构图(助记)</p>
-<img src="OS.assets/屏幕截图 2023-12-27 144300.png" alt="屏幕截图 2023-12-27 144300" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 144312.png" alt="屏幕截图 2023-12-27 144312" style="zoom:67%;" />
-<h4 id="1-计算磁盘系统的盘块数">1.计算磁盘系统的盘块数</h4>
-<p>盘块数 = 盘片数 * 2面 * 每个盘面磁道数 * 每个磁道扇区数</p>
-<img src="OS.assets/屏幕截图 2023-12-27 144212.png" alt="屏幕截图 2023-12-27 144212" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 145006.png" alt="屏幕截图 2023-12-27 145006" style="zoom:67%;" />
-<h4 id="2-给出逻辑盘块号，转换成柱面号（磁道号）、磁头号（盘面号）和扇区号">2.给出逻辑盘块号，转换成柱面号（磁道号）、磁头号（盘面号）和扇区号</h4>
-<img src="OS.assets/屏幕截图 2023-12-27 145358.png" alt="屏幕截图 2023-12-27 145358" style="zoom:67%;" />
-<h4 id="3-给出柱面号、磁头号和扇区号，转换成逻辑盘块号">3.给出柱面号、磁头号和扇区号，转换成逻辑盘块号</h4>
-<h3 id="八、移臂调度算法的应用">八、移臂调度算法的应用</h3>
-<h4 id="1-先来先服务：只考虑访问请求的先后次序">1.先来先服务：只考虑访问请求的先后次序</h4>
-<h4 id="2-最短寻道时间优先-img-src-OS-assets-屏幕截图-2023-12-27-145902-png-alt-屏幕截图-2023-12-27-145902-style-zoom-67">2.最短寻道时间优先<img src="OS.assets/屏幕截图 2023-12-27 145902.png" alt="屏幕截图 2023-12-27 145902" style="zoom:67%;" /></h4>
-<h4 id="3-电梯调度-SCAN">3.电梯调度(SCAN)</h4>
-<img src="OS.assets/屏幕截图 2023-12-27 145927.png" alt="屏幕截图 2023-12-27 145927" style="zoom:67%;" />
-<h4 id="4-循环扫描-CSCAN">4.循环扫描(CSCAN)</h4>
-<img src="OS.assets/屏幕截图 2023-12-27 145942.png" alt="屏幕截图 2023-12-27 145942" style="zoom:67%;" />
-<h3 id="九、物理块的优化分布——优化旋转延迟时间：分析优化存储前、后，顺序读取并处理完所有记录的时间计算">九、物理块的优化分布——优化旋转延迟时间：分析优化存储前、后，顺序读取并处理完所有记录的时间计算</h3>
-<p>大概原理：算出处理完第一个数据的时候磁头的位置，让下一个要读取的数据恰好存放在离磁头位置最近的下一个扇区。</p>
-<img src="OS.assets/屏幕截图 2023-12-27 150609.png" alt="屏幕截图 2023-12-27 150609" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 150624.png" alt="屏幕截图 2023-12-27 150624" style="zoom:67%;" />
-<h2 id="第七章-文件管理">第七章 文件管理</h2>
-<h3 id="一、名词解释-5">一、名词解释</h3>
-<p>1.文件系统：OS用于组织和管理文件的软件和数据结构</p>
-<p>2.文件的逻辑结构：从用户角度出发观察到的文件中的各逻辑记录的组织形式。例如数据库系统中打开的关系表。</p>
-<p>3.文件的物理结构：系统将文件存储在外存上所形成的一种组织形式，是用户看不到的——又称存储结构。</p>
-<h3 id="二、目录是文件系统实现“按名存取”的重要手段。">二、目录是文件系统实现“按名存取”的重要手段。</h3>
-<img src="OS.assets/屏幕截图 2024-01-01 183050.png" alt="屏幕截图 2024-01-01 183050" style="zoom:67%;" />
-<h2 id="第八章-磁盘存储器管理">第八章 磁盘存储器管理</h2>
-<h3 id="一、外存分配方式——OS-对文件分配到的盘块如何管理（组织），即组织理已分配盘块">一、外存分配方式——OS 对文件分配到的盘块如何管理（组织），即组织理已分配盘块</h3>
-<h4 id="1-连续组织方式">1.连续组织方式</h4>
-<p>（1）如何通过目录实现连续文件盘块的组织：目录中存储（文件名、起始盘块号、长度）</p>
-<p>（2）可实现直接（随机）访问，仅启动一次磁盘</p>
-<img src="OS.assets/屏幕截图 2023-12-27 192417.png" alt="屏幕截图 2023-12-27 192417" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 192453.png" alt="屏幕截图 2023-12-27 192453" style="zoom:67%;" />
-<h4 id="2-隐式链接：通过盘块的地址域链接，顺序查找盘块号、多次启动磁盘">2.隐式链接：通过盘块的地址域链接，顺序查找盘块号、多次启动磁盘</h4>
-<p>每个盘块留出一部分存下一盘块地址，类似于链表</p>
-<p>（1）盘块的组织：目录（文件名、起始、终止）、其余盘块通过地址域链接</p>
-<p>（2）盘块的访问过程：顺序访问，多次启动磁盘</p>
-<h4 id="3-显示链接：通过-FAT-链接，在-FAT-中（常驻内存）顺序查找盘块号、1-次启动磁盘">3.显示链接：通过 FAT 链接，在 FAT 中（常驻内存）顺序查找盘块号、1 次启动磁盘</h4>
-<p>FAT文件分配表，整个系统仅一张，存每个盘块的下一个盘块号</p>
-<p>（1）盘块的组织：目录（文件名、起始盘块号）+FAT，其余盘块号存入 FAT[上一个盘块号]位置</p>
-<p>（2）盘块的访问过程：顺序访问 FAT（在内存）查找盘块号时不启动 I/O，找到需要的物理块号，启动 1 次磁盘</p>
-<img src="OS.assets/屏幕截图 2023-12-27 194202.png" alt="屏幕截图 2023-12-27 194202" style="zoom:67%;" />
-<p>（3）FAT 占内存空间大小的计算</p>
-<img src="OS.assets/屏幕截图 2023-12-27 194222.png" alt="屏幕截图 2023-12-27 194222" style="zoom:67%;" />
-<img src="OS.assets/image-20231227194306781.png" alt="image-20231227194306781" style="zoom:67%;" />
-<p>（4）文件 F 文件分到的盘块如何通过目录和 FAT 组织，或通过目录和 FAT 找到文件F 分到的盘块。</p>
-<img src="OS.assets/屏幕截图 2023-12-27 194935.png" alt="屏幕截图 2023-12-27 194935" style="zoom:67%;" />
-<h4 id="4-索引分配——单级索引">4.索引分配——单级索引</h4>
-<p>（1）盘块的组织：目录（文件名、索引块）、索引表</p>
-<p>（2） 盘块的访问过程：可实现随机访问，2 次启动磁盘</p>
-<img src="OS.assets/屏幕截图 2023-12-27 195539.png" alt="屏幕截图 2023-12-27 195539" style="zoom:67%;" />
-<p>（3） 对应文件大小的计算</p>
-<p>最大文件大小 = 索引表最大存储数量 * 每个块大小</p>
-<img src="OS.assets/屏幕截图 2023-12-27 195627.png" alt="屏幕截图 2023-12-27 195627" style="zoom:67%;" />
-<h4 id="5-索引分配——多级索引（同内存管理的多级页表）">5.索引分配——多级索引（同内存管理的多级页表）</h4>
-<p>（1） 盘块的组织：目录（文件名、外层索引块号）、外层索引表、内层索引表</p>
-<p>（2） 盘块的访问过程：可实现随机访问，3 次启动磁盘</p>
-<p>（3） 对应文件大小的计算</p>
-<p>（4）文件中逻辑地址化为：外层索引号(组号)、内层索引号(组内位移)及块内位移</p>
-<p>计算过程与多级页表相同，略</p>
-<p>课件例题：</p>
-<img src="OS.assets/屏幕截图 2023-12-27 195921.png" alt="屏幕截图 2023-12-27 195921" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 195955.png" alt="屏幕截图 2023-12-27 195955" style="zoom:67%;" />
-<h4 id="6-索引分配——增量式索引组织方式（混合索引）——UNIX-系统使用">6.索引分配——增量式索引组织方式（混合索引）——UNIX 系统使用</h4>
-<p>（1）盘块的组织：索引节点中的 13 个地址项</p>
-<p>（2）盘块的访问过程：给出逻辑地址，给出读取对应数据盘块的过程。根据逻辑块号可知在哪个地址项中取物理块号（直接文件、一级索引、二级、三级）</p>
-<img src="OS.assets/屏幕截图 2023-12-27 200331.png" alt="屏幕截图 2023-12-27 200331" style="zoom:67%;" />
-<p>（3）对应文件大小的计算</p>
-<img src="OS.assets/屏幕截图 2023-12-27 201127.png" alt="屏幕截图 2023-12-27 201127" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 201151.png" alt="屏幕截图 2023-12-27 201151" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 201213.png" alt="屏幕截图 2023-12-27 201213" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 201247.png" alt="屏幕截图 2023-12-27 201247" style="zoom:67%;" />
-<p>（4） 读取一个数据盘块最少启动 1 次磁盘（直接文件）、最多 4 次（三级索引）</p>
-<img src="OS.assets/屏幕截图 2023-12-27 201321.png" alt="屏幕截图 2023-12-27 201321" style="zoom:67%;" />
-<h4 id="7-自行设计盘块组织方式：">7.自行设计盘块组织方式：</h4>
-<p>（1）例 1：某用户设计的操作系统采用混合索引方式对文件的盘块进行组织。一个盘块大小是 512B，一个索引项 2B，采用 10 个地址项，其中 0-6 为直接地址项、7、8 均采用一级索引、9 采用二级索引。</p>
-<img src="OS.assets/屏幕截图 2023-12-27 201439.png" alt="屏幕截图 2023-12-27 201439" style="zoom:67%;" />
-<p>（2）例 2：某文件系统的最大容量为 4TB，以磁盘块为基本分配单位。磁盘大小为1KB，某文件的 FCB（文件控制块）中存储了文件名及该文件的索引表，索引表的大小为 512B。回答：</p>
-<p>​				a. 假设 FCB 中的索引表仅采用直接索引结构，索引表中仅存放盘块号，索引表项中的盘块号最少占多少字节？可支持的单个文件最大长度是多大？</p>
-<p>​				b. 假设索引表区采用如下结构：第 0-7 字节采用&lt;起始块号,块数&gt;格式表示文件创建时预分配的连续空间。其中起始块号占 6B，块数占 2B；剩余的 504B采用直接索引结构，一个索引项占 6B，则可支持的单个文件最大长度是多少字节？</p>
-<p><img src="OS.assets/0d745f4bfaffd3b3e4f608beda147ed.jpg" alt="0d745f4bfaffd3b3e4f608beda147ed"></p>
-<h3 id="二、文件存储空间管理：操作系统如何管理磁盘的空闲盘块，以及空闲盘块的分配及回收，即完成空闲磁盘块的管理。">二、文件存储空间管理：操作系统如何管理磁盘的空闲盘块，以及空闲盘块的分配及回收，即完成空闲磁盘块的管理。</h3>
-<h4 id="1-连续分配方式（空闲表法）——连续文件：同内存的动态分区分配方式">1.连续分配方式（空闲表法）——连续文件：同内存的动态分区分配方式</h4>
-<img src="OS.assets/屏幕截图 2023-12-27 205659.png" alt="屏幕截图 2023-12-27 205659" style="zoom:67%;" />
-<h4 id="2-离散分配方式之一：位示图法">2.离散分配方式之一：位示图法</h4>
-<p>（1）使用的数据结构：通常用一个计算机字（例如 32 位）代表位示图的一行</p>
-<p>​		· 位示图是一个m行n列的二维数组，每一个数组元素代表一个盘块状态（0：分配，1：空闲）</p>
-<p>​				一般情况下，<em><strong>m为计算机字数，n为字长</strong></em></p>
-<p>​		· 因一个数组元素的取值只有0或1，因此使用<strong>一个二进制位</strong>即可。</p>
-<p>​		· 位示图的实现：使用<strong>一个计算机字</strong>对应位示图的<strong>一行</strong></p>
-<p>（2）位示图需要计算机字数的计算</p>
-<img src="OS.assets/屏幕截图 2023-12-27 205937.png" alt="屏幕截图 2023-12-27 205937" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 210646.png" alt="屏幕截图 2023-12-27 210646" style="zoom:67%;" />
-<p>（3）盘块号与位示图行、列号的转换（盘块号、行列号均从 0 开始）</p>
-<img src="OS.assets/屏幕截图 2023-12-27 210746.png" alt="屏幕截图 2023-12-27 210746" style="zoom:67%;" />
-<p>例题：（<strong>注意</strong>：本题是从1开始编号）</p>
-<img src="OS.assets/屏幕截图 2023-12-27 212129.png" alt="屏幕截图 2023-12-27 212129" style="zoom:67%;" />
-<p>正确答案：B		易错选C</p>
-<p>（4） 分配盘块的过程：位示图（行、列号）→盘块号（逻辑号）→磁盘物理地址（柱面号、磁头号和扇区号）</p>
-<p>​			· 从0行0列开始扫描位示图，查找值为1的数组元素</p>
-<p>​			· 若找到，将行列号转换成盘块号b;没找到，分配失败。</p>
-<img src="OS.assets/屏幕截图 2023-12-27 211435.png" alt="屏幕截图 2023-12-27 211435" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 211511.png" alt="屏幕截图 2023-12-27 211511" style="zoom:67%;" />
-<p>（5） 回收盘块的过程：磁盘物理地址（柱面号、磁头号和扇区号）→盘块号（逻辑号）→位示图（行、列号）</p>
-<p>​			· 假设盘块号为b，求出行号 i 、列号 j 将位示图第i行第j列置为1</p>
-<img src="OS.assets/屏幕截图 2023-12-27 211603.png" alt="屏幕截图 2023-12-27 211603" style="zoom:67%;" />
-<h4 id="3-离散分配方式之一：成组链接法（※）">3.离散分配方式之一：成组链接法（※）</h4>
-<p>（1） 使用的数据结构：空闲盘块号栈</p>
-<img src="OS.assets/屏幕截图 2023-12-27 212333.png" alt="屏幕截图 2023-12-27 212333" style="zoom:67%;" />
-<p>（2）盘块成组链接的实现：利用每组的栈底盘块（第一个盘块）存储上一组盘块的信息。</p>
-<p>简单描述就是，第一组空闲盘块栈正常放但是free[0]放0代表结束标志（这一组是第一组），其他空闲盘块栈的free[0]正常放空闲盘块号，而这组free[0]存的这块空闲区域要把前一组的空闲盘块栈存进去。</p>
-<img src="OS.assets/屏幕截图 2023-12-27 213430.png" alt="屏幕截图 2023-12-27 213430" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 213450.png" alt="屏幕截图 2023-12-27 213450" style="zoom:67%;" />
-<img src="OS.assets/屏幕截图 2023-12-27 213508.png" alt="屏幕截图 2023-12-27 213508" style="zoom:67%;" />
-<p>（3） 根据给定的盘块链接情况计算空闲盘块的个数：第一组实际是 99 个、中间组都是 100 个，最后一组（栈中的那组）看 S.nfree 的值。</p>
-<p>承接（2）的例子说明：</p>
-<img src="OS.assets/屏幕截图 2023-12-27 214144.png" alt="屏幕截图 2023-12-27 214144" style="zoom:67%;" />
-<p>（4） 根据给定的盘块链接信息，回收一组盘块后，给出回收后的盘块链接（过程描述见下，原理详见（2））</p>
-<p>​			a. 若回收某盘块 i 时栈满（S.nfree==100），则先将栈中的内容写入盘块 i 中、清空栈、将块号 i 写入栈底。</p>
-<p>​			b. 若回收某盘块i时栈没满（S.nfree&lt;100），将盘块i记入栈顶S.free[S.nfree]=i、栈顶指针 S.nfree++。</p>
-<p>（5）根据给定的盘块链接信息，分配一组盘块后，给出分配后的盘块链接：（过程描述见下，原理详见（2））</p>
-<p>​			a. 若分配的不是栈底盘块，则直接分配，即分配的盘块号 b=S.free[S.nfree-1]，栈顶指针 S.nfree–。</p>
-<p>​			b. 若是栈底盘块，先将栈底盘块 b#中的内容装入空闲盘块号栈后再分配盘块 b#。</p>
-<p><em><strong>注意：成组链接法中，盘块的分配和回收都是在空闲盘块号栈中进行。</strong></em></p>
-<h2 id="第九章-操作系统接口">第九章 操作系统接口</h2>
-<p>以下为网上搜索结果</p>
-<h3 id="一、什么是系统调用？">一、什么是系统调用？</h3>
-<p>OS提供给应用程序和用户空间程序的访问OS服务接口，允许用户请求特权操作和与OS内核的方式。</p>
-<h3 id="二、系统调用和一般的过程调用有何区别">二、系统调用和一般的过程调用有何区别</h3>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>目的</th>
-<th>方式</th>
-<th>权限</th>
-<th>开销</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>系统调用</td>
-<td>请求特权服务、操作、跨越用户空间边界</td>
-<td>用户与内核空间切换</td>
-<td>比用户程序权限高</td>
-<td>切换过程开销</td>
-</tr>
-<tr>
-<td>一般调用</td>
-<td>执行函数在同一用户空间</td>
-<td>跳转函数地址</td>
-<td>用户程序权限限制</td>
-<td>栈开销</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <tags>
-        <tag>OS</tag>
-        <tag>caozuoxitong</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>Markdown图床配置</title>
+    <url>/imgs_Markdown/</url>
+    <content><![CDATA[<h1>Markdown图床配置</h1>
+<h2 id="前言">前言</h2>
+<p>本文使用typora，GitHub图床，PicGo实现编辑markdown文本时，写入的图片自动压缩并上传图片，返回可以在任意场景查看的链接，再也不用担心辛辛苦苦写好的文章换个设备照片消失的问题了</p>
+<h2 id="GitHub仓库设置">GitHub仓库设置</h2>
+<h4 id="创建GitHub仓库">创建GitHub仓库</h4>
+<p>自行创建一个用于存储图片的GitHub仓库即可，注意选择public</p>
+<h4 id="获取Token">获取Token</h4>
+<p>点击右上角个人头像选择settings</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242017006.webp" alt="image-20241024201709618"></p>
+<p>左侧选择Developer settings</p>
+<p>personal access token中创建自己的Token</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242022693.webp" alt="image-20241024202230065"></p>
+<p>点击Generate token创建，token只会显示一次，一定要保存好</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/image-20241024205855586.webp" alt="image-20241024205855586"></p>
+<h4 id="PicGo中配置信息">PicGo中配置信息</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242004431.webp" alt="image-20241024200422966"></p>
+<p>仓库名为：GitHub用户名/仓库名，例如：zhangsan/repo</p>
+<p>设定分支名选择main即可</p>
+<p>Token：输入上一步获取的Token即可</p>
+<p>剩余两个可以不填，或根据需求自行填写</p>
+<div class="note pink info modern"><p>国内可能上传较慢，可以在自定义域名中填写：<a href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D">https://cdn.jsdelivr.net/gh/用户名/仓库名</a></p>
+</div>
+<p>配置完成后点击确定即可</p>
+<h2 id="PicGo配置">PicGo配置</h2>
+<h3 id="GitHub图床配置">GitHub图床配置</h3>
+<h4 id="下载PicGo">下载PicGo</h4>
+<p>官网链接：<a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a></p>
+<p>此为开源项目，自行下载即可</p>
+<h4 id="安装并配置compress-next">安装并配置compress-next</h4>
+<p>compress-next与compress功能相同，均为自动压缩上传图片的插件，但后者已经很久没有更新了，插件详情见<a href="https://github.com/supine0703/picgo-plugin-compress-next">compress-next的GitHub页</a></p>
+<h4 id="在PicGo的插件设置中搜索compress-next，点击安装">在PicGo的插件设置中搜索compress-next，点击安装</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242047447.webp" alt="image-20241024183840289"></p>
+<h4 id="点击设置——配置plugin">点击设置——配置plugin</h4>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242047074.webp" alt="image-20241024193332167"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046012.webp" alt="image-20241024193427565"></p>
+<h5 id="参数配置：">参数配置：</h5>
+<ul>
+<li>Compress Type (过段时间会制作详细对比分析表):
+<ul>
+<li><a href="https://tinypng.com/">tinypng</a>: 无损压缩，需要上传到 tinypng</li>
+<li><a href="https://github.com/imagemin/imagemin">imagemin</a>: 图片压缩不改变后缀名，支持 <code>jpeg</code> 和 <code>png</code>，使用 <a href="https://www.npmjs.com/package/imagemin-mozjpeg">mozjpeg</a> 和 <a href="https://www.npmjs.com/package/imagemin-upng">upng</a></li>
+<li><a href="https://www.npmjs.com/package/imagemin-webp">imagemin-webp</a>: 本地压缩为 webp<br>
+注意：有些图床（比如 <a href="http://sm.ms">sm.ms</a>）不支持 webp 图片格式，会上传失败</li>
+<li><a href="https://www.npmjs.com/package/webp-converter">webp-converter</a>: 同上</li>
+</ul>
+</li>
+<li>Gif Compress Type:
+<ul>
+<li><a href="https://www.npmjs.com/package/webp-converter">webp-converter</a>: 本地有损将 gif 压缩为 webp</li>
+<li><a href="https://www.npmjs.com/package/imagemin-gif2webp">imagemin-gif2webp</a>:</li>
+</ul>
+</li>
+<li>Auto Refresh TinyPng Key Across Months:
+<ul>
+<li>yes: 检测到跨月（与上次使用时年月不同）则自动刷新 TinyPng API Key 的状态</li>
+<li>no: 不检测，但是仍然记录年月</li>
+</ul>
+</li>
+<li>TinyPng API Key:
+<ul>
+<li>在 <a href="https://tinypng.com/developers">developers</a> 中申请</li>
+<li>逗号<code>,</code>隔开，可使用多个 Key 叠加使用次数</li>
+</ul>
+</li>
+</ul>
+<p>根据自己需求配置参数即可，API Key申请教程见下</p>
+<h5 id="API-Key申请">API Key申请</h5>
+<p>进入<a href="https://tinypng.com/developers">TinyPNG – Developer API</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046377.webp" alt="image-20241024194026193"></p>
+<p>输入名字和邮箱，点击Get your API key获取</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046546.webp" alt="image-20241024194319120"></p>
+<p>此时邮箱会受到一条消息，进行相应操作即可完成。</p>
+<p>完成登录后点击DEVELOPER API——Go to dashboard</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242009560.webp" alt="image-20241024200941995"></p>
+<p>在此处添加API即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242009717.webp" alt="image-20241024200931134"></p>
+<h4 id="启用插件">启用插件</h4>
+<p>配置完成后点击设置——启用transformer</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242045824.webp" alt="image-20241024193332167"></p>
+<h2 id="typora配置">typora配置</h2>
+<h4 id="下载typora">下载typora</h4>
+<p>官网链接：<a href="https://typoraio.cn/">Typora 官方中文站</a></p>
+<p>这么好用的软件，可惜收费……</p>
+<p>但是！！！！！！！</p>
+<p>这里给个百度网盘链接，懂的都懂o( ❛ᴗ❛ )o：<a href="https://pan.baidu.com/s/1PEpaqcK77aiune1CLNWdvQ?pwd=7s87">https://pan.baidu.com/s/1PEpaqcK77aiune1CLNWdvQ?pwd=7s87</a></p>
+<h4 id="配置信息">配置信息</h4>
+<p>点击左上角文件——偏好设置——图像</p>
+<p>按照图片进行设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242029641.webp" alt="image-20241024202930146"></p>
+<h2 id="完成配置">完成配置</h2>
+<p>接下来就可以在markdown中插入图片自动实现压缩并上传图片到GitHub了，再也不用担心写好的文章上传博客图片加载丢失的问题了。</p>
 ]]></content>
   </entry>
   <entry>
@@ -631,6 +213,8 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="github图床">github图床</h2>
 <p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241701477.png" alt="image-20241024170107443"></p>
+<h3 id="test压缩">test压缩</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/image-20241024175251447.webp" alt="image-20241024175251447"></p>
 ]]></content>
   </entry>
 </search>
