@@ -1,71 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>pytorch+CUDA安装教程</title>
-    <url>/cuda/</url>
-    <content><![CDATA[<h1>pytorch+CUDA安装教程</h1>
-<h2 id="检查GPU配置">检查GPU配置</h2>
-<h3 id="查看电脑的GPU">查看电脑的GPU</h3>
-<p>打开任务管理器，选择性能——GPU</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241707602.png" alt="屏幕截图 2024-10-24 144912"></p>
-<p>我的GPU为NVIDIA GeForce RTX 3060 Laptop GPU</p>
-<h3 id="查看GPU是否支持CUDA">查看GPU是否支持CUDA</h3>
-<p>前往<a href="https://www.nvidia.cn/geforce/technologies/cuda/supported-gpus/">CUDA | 支持的GPU | GeForce</a>查看是否支持自己的GPU</p>
-<h3 id="查看NVIDIA驱动支持的CUDA型号">查看NVIDIA驱动支持的CUDA型号</h3>
-<p>打开终端，输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NVIDIA-smi</span><br></pre></td></tr></table></figure>
-<p>查看支持的CUDA版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241707715.png" alt="屏幕截图 2024-10-24 150024"></p>
-<h2 id="下载CUDA及cuDNN">下载CUDA及cuDNN</h2>
-<h3 id="CUDA下载">CUDA下载</h3>
-<p>官网链接：<a href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit - Free Tools and Training | NVIDIA Developer</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241708229.png" alt="屏幕截图 2024-10-24 150336"></p>
-<p>点击Download Now，根据个人情况进行选择，点击下载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241709778.png" alt="屏幕截图 2024-10-24 150913"></p>
-<h3 id="cuDNN下载">cuDNN下载</h3>
-<p>官网链接：<a href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN Archive | NVIDIA Developer</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241709741.png" alt="屏幕截图 2024-10-24 151439"></p>
-<p>选择一个可以支持CUDA版本的cuDNN，例如我CUDA版本为12.6，那就选择for CUDA 12.x的版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241710861.png" alt="屏幕截图 2024-10-24 151609"></p>
-<p>选择自己操作系统对应的下载即可，我这里选择windows的版本</p>
-<h3 id="将cuDNN放入到CUDA安装路径">将cuDNN放入到CUDA安装路径</h3>
-<h2 id="安装anaconda">安装anaconda</h2>
-<h2 id="创建虚拟环境，安装pytorch">创建虚拟环境，安装pytorch</h2>
-<p>1.打开Anaconda Prompt，输入</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241711558.png" alt="屏幕截图 2024-10-24 151933"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda create -n &lt;环境名&gt; python=version</span><br></pre></td></tr></table></figure>
-<div class="note pink info modern"><p>环境名自己起，python版本选择与pytorch版本对应的版本，这里以<a href="https://pytorch.org/">PyTorch官网</a>最新版为例：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241712579.png" alt="屏幕截图 2024-10-24 152338"></p>
-<p>这里写明pytorch2.5.0版本至少需要python版本为3.9</p>
-</div>
-<p>2.这里输入y，回车安装即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241712684.png" alt="屏幕截图 2024-10-24 152546"></p>
-<p>安装成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241712722.png" alt="屏幕截图 2024-10-24 152710"></p>
-<p>3.进入创建好的环境</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda activte &lt;环境名&gt;</span><br></pre></td></tr></table></figure>
-<p>4.进入pytorch官网</p>
-<p>官网链接：<a href="https://pytorch.org/">PyTorch</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241713699.png" alt="屏幕截图 2024-10-24 153027"></p>
-<p>这里根据电脑的操作系统选择即可，我这里是图中的配置，注意** CUDA版本不要超过NVIDIA驱动支持的CUDA型号 **</p>
-<p>5.复制command命令回到刚才的环境中执行即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715535.png" alt="屏幕截图 2024-10-24 153417"></p>
-<div class="note purple info modern"><p>如果anaconda改过国内源，那么下载时把 -c pytorch 删掉</p>
-</div>
-<p>这里输入y，回车安装</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715201.png" alt="屏幕截图 2024-10-24 153448"></p>
-<p>等待一段时间安装就成功了</p>
-<h2 id="测试环境">测试环境</h2>
-<p>在安装好的环境中输入python</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715920.png" alt="屏幕截图 2024-10-24 154637"></p>
-<p>输入 import torch</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715594.png" alt="屏幕截图 2024-10-24 154709"></p>
-<p>输入 torch.cuda.is_available()</p>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241716280.png" alt="屏幕截图 2024-10-24 154748"></p>
-<p>返回true即表示成功</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Markdown图床配置</title>
     <url>/imgs_Markdown/</url>
     <content><![CDATA[<h1>Markdown图床配置</h1>
@@ -164,6 +99,9 @@
 <h2 id="完成配置">完成配置</h2>
 <p>接下来就可以在markdown中插入图片自动实现压缩并上传图片到GitHub了，再也不用担心写好的文章上传博客图片加载丢失的问题了。</p>
 ]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
       <tags>
         <tag>图床</tag>
         <tag>Markdown</tag>
@@ -224,5 +162,133 @@
 <h3 id="test压缩">test压缩</h3>
 <p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/image-20241024175251447.webp" alt="image-20241024175251447"></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>pytorch+CUDA安装教程</title>
+    <url>/cuda/</url>
+    <content><![CDATA[<h1>检查GPU配置</h1>
+<h2 id="查看电脑的GPU">查看电脑的GPU</h2>
+<p>打开任务管理器，选择性能——GPU</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241707602.png" alt="屏幕截图 2024-10-24 144912"></p>
+<p>我的GPU为NVIDIA GeForce RTX 3060 Laptop GPU</p>
+<h2 id="查看GPU是否支持CUDA">查看GPU是否支持CUDA</h2>
+<p>前往<a href="https://www.nvidia.cn/geforce/technologies/cuda/supported-gpus/">CUDA | 支持的GPU | GeForce</a>查看是否支持自己的GPU，不过官网总是一闪而过，有时看不见支持的型号，可以自行去查看</p>
+<h2 id="查看NVIDIA驱动支持的CUDA型号">查看NVIDIA驱动支持的CUDA型号</h2>
+<p>打开终端，输入</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">NVIDIA<span class="literal">-smi</span></span><br></pre></td></tr></table></figure>
+<p>查看支持的CUDA版本，这里CUDA Version为12.6，最高能支持到12.6，如果这个版本不能满足需求想要更高版本，那就去更新NVIDIA驱动的版本之后再来查询</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241707715.png" alt="屏幕截图 2024-10-24 150024"></p>
+<h1>下载CUDA及cuDNN</h1>
+<h2 id="CUDA下载">CUDA下载</h2>
+<p>官网链接：<a href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit - Free Tools and Training | NVIDIA Developer</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241708229.png" alt="屏幕截图 2024-10-24 150336"></p>
+<p>点击Download Now，根据个人情况进行选择，点击Download，我的选择如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241709778.png" alt="屏幕截图 2024-10-24 150913"></p>
+<p>打开下载好的安装包，这里默认即可，这个路径并不是cuda的安装位置，而是cuda安装过程的临时文件位置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261640711.webp" alt="image-20241026164016391"></p>
+<p>这里选择继续</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261640532.webp" alt="image-20241026164043335"></p>
+<p>这里勾选上然后next</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261642063.webp" alt="image-20241026164239846"></p>
+<p>这里选择精简即可，也可以自定义根据自己需求选择（小白不建议）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261642762.webp" alt="image-20241026164252570"></p>
+<p>这里就安装完成了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261644241.webp" alt="image-20241026164404048"></p>
+<h2 id="cuDNN下载">cuDNN下载</h2>
+<p>官网链接：<a href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN Archive | NVIDIA Developer</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241709741.png" alt="屏幕截图 2024-10-24 151439"></p>
+<p>选择一个可以支持CUDA版本的cuDNN，例如我CUDA版本为12.6，那就选择for CUDA 12.x的版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241710861.png" alt="屏幕截图 2024-10-24 151609"></p>
+<p>选择自己操作系统对应的下载即可，我这里选择windows的版本</p>
+<h2 id="将cuDNN放入到CUDA安装路径">将cuDNN放入到CUDA安装路径</h2>
+<p>下载好压缩包以后解压，将整个文件夹放入CUDA安装路径就行</p>
+<div class="note purple info modern"><p>CUDA安装路径为：C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6</p>
+<p>这里给一个查看方式：</p>
+<p>​	打开系统环境变量，在系统变量中找到CUDA_PATH就是cuda的安装路径了</p>
+<img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261648247.png" alt="image-20241026164826122" style="zoom: 67%;" />
+</div>
+<p>我这里将解压出来的文件夹名改成了cudnn（ps：因为默认的太长了）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261649182.webp" alt="image-20241026164950934"></p>
+<h1>下载及配置anaconda</h1>
+<h2 id="下载anaconda">下载anaconda</h2>
+<p>官方网站：<a href="https://www.anaconda.com/download">Download Anaconda Distribution | Anaconda</a></p>
+<p>官方网站下载速度比较慢，而且需要注册登录比较麻烦，可以选择使用清华镜像站下载anaconda，网址：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">Index of /anaconda/archive/ | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+<p>一定要选择anaconda3，不要选anaconda2！！！anaconda3是用的python3，anaconda2是用的python2。我这里选择anaconda3-2023年9月版本的，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261654579.webp" alt="image-20241026165424349"></p>
+<p>打开下载好的安装包，点击next</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261657413.webp" alt="image-20241026165728260"></p>
+<p>选择just me，点击next</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261658021.webp" alt="image-20241026165805904"></p>
+<p>这里选择安装位置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261658021.webp" alt="image-202410261658021"></p>
+<p>这里选择1,3即可不要选择2，2可能与其他应用产生冲突，建议稍后自行配置环境变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261700207.webp" alt="image-20241026170018063"></p>
+<p>到这里就安装成功了，这两个勾都取消即可，点击finish完成安装</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261701959.webp" alt="image-20241026170157829"></p>
+<h2 id="配置环境变量">配置环境变量</h2>
+<p>打开环境变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261704802.png" alt="image-20241026170444642"></p>
+<p>打开系统变量的Path，点击右侧新建，然后添加anaconda安装路径，以及安装路径下scripts文件夹路径，以及安装路径下Library\bin文件夹路径。例如我电脑Anaconda安装在”D:\App\Anaconda“位置上，那么三个路径如图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261706333.webp" alt="image-20241026170625189"></p>
+<p>完成后点击确定关闭界面。</p>
+<h1>创建虚拟环境，安装pytorch</h1>
+<p>1.再开始菜单中找到anaconda3，打开Anaconda Prompt，输入下面语句创建环境</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241711558.png" alt="屏幕截图 2024-10-24 151933"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda create -n 环境名 python=version</span><br></pre></td></tr></table></figure>
+<div class="note pink info modern"><p>环境名自己起，python版本选择与pytorch版本对应的版本，这里以<a href="https://pytorch.org/">PyTorch官网</a>最新版为例：</p>
+<img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241712579.png" alt="屏幕截图 2024-10-24 152338" style="zoom:50%;" />
+<p>这里写明了pytorch2.5.0版本至少需要python版本为3.9</p>
+</div>
+<p>2.这里输入y，回车安装即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241712684.png" alt="屏幕截图 2024-10-24 152546"></p>
+<p>安装成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241712722.png" alt="屏幕截图 2024-10-24 152710"></p>
+<p>3.进入创建好的环境</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda activte 环境名</span><br></pre></td></tr></table></figure>
+<p>4.进入pytorch官网</p>
+<p>官网链接：<a href="https://pytorch.org/">PyTorch</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241713699.png" alt="屏幕截图 2024-10-24 153027"></p>
+<p>这里根据电脑的操作系统选择即可，我这里是图中的配置，注意<mark class="hl-label red">CUDA版本不要超过NVIDIA驱动支持的CUDA型号</mark></p>
+<p>5.复制command命令回到刚才的环境中执行即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715535.png" alt="屏幕截图 2024-10-24 153417"></p>
+<div class="note red info modern"><p>有时solving environment会出现unsuccessful的情况，耐心等待一会可能就会成功，如果长时间不成功，也许是镜像源的问题，经几次测试默认源几乎不会出现这种情况，稍等后便可正常下载</p>
+</div>
+<div class="note purple info modern"><p>如果anaconda改过国内源，那么下载时把 -c pytorch 删掉，否则仍然使用默认源下载</p>
+</div>
+<p>这里输入y，回车安装</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715201.png" alt="屏幕截图 2024-10-24 153448"></p>
+<p>等待一段时间安装就成功了</p>
+<h1>测试环境</h1>
+<p>在安装好的环境中输入python</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715920.png" alt="屏幕截图 2024-10-24 154637"></p>
+<p>输入 import torch</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241715594.png" alt="屏幕截图 2024-10-24 154709"></p>
+<p>输入 torch.cuda.is_available()</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241716280.png" alt="屏幕截图 2024-10-24 154748"></p>
+<p>返回true即表示成功</p>
+<h1>在pycharm中使用刚才装好的环境</h1>
+<p>打开pycharm，进入项目后，打开设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261721166.webp" alt="image-20241026172153040"></p>
+<p>在左侧选择项目——python解释器——添加解释器——添加本地解释器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261722600.webp" alt="image-20241026172252420"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261723277.webp" alt="image-20241026172321173"></p>
+<p>选择conda环境——右侧选择conda.exe环境，路径应该为anaconda安装路径下scripts文件夹下——点击加载环境</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261724137.webp" alt="image-20241026172443031"></p>
+<p>加载完毕后选择使用现有环境，就可以选择我们anaconda中创建的环境啦——然后点击确定即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261725117.webp" alt="image-20241026172552957"></p>
+<p>在python解释器中就可以看见我们刚才创建的解释器了，进行选择点击确定即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410261728634.webp" alt="image-20241026172821390"></p>
+<p>在这个项目中创建一个python文件用下边代码进行测试pytorch以及CUDA是否安装成功</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.cuda.is_available())</span><br></pre></td></tr></table></figure>
+<p>输出为True即成功！！！</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>CUDA</tag>
+        <tag>pytorch</tag>
+        <tag>anaconda</tag>
+      </tags>
   </entry>
 </search>
