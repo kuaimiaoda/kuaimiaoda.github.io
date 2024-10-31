@@ -1,113 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Markdown图床配置</title>
-    <url>/imgs_Markdown/</url>
-    <content><![CDATA[<h1>Markdown图床配置</h1>
-<h2 id="前言">前言</h2>
-<p>本文使用typora，GitHub图床，PicGo实现编辑markdown文本时，写入的图片自动压缩并上传图片，返回可以在任意场景查看的链接，再也不用担心辛辛苦苦写好的文章换个设备照片消失的问题了</p>
-<h2 id="GitHub仓库设置">GitHub仓库设置</h2>
-<h4 id="创建GitHub仓库">创建GitHub仓库</h4>
-<p>自行创建一个用于存储图片的GitHub仓库即可，注意选择public</p>
-<h4 id="获取Token">获取Token</h4>
-<p>点击右上角个人头像选择settings</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242017006.webp" alt="image-20241024201709618"></p>
-<p>左侧选择Developer settings</p>
-<p>personal access token中创建自己的Token</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242022693.webp" alt="image-20241024202230065"></p>
-<p>点击Generate token创建，token只会显示一次，一定要保存好</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/image-20241024205855586.webp" alt="image-20241024205855586"></p>
-<h2 id="PicGo配置">PicGo配置</h2>
-<h3 id="GitHub图床配置">GitHub图床配置</h3>
-<h4 id="下载PicGo">下载PicGo</h4>
-<p>官网链接：<a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a></p>
-<p>此为开源项目，自行下载即可</p>
-<h4 id="安装并配置compress-next">安装并配置compress-next</h4>
-<p>compress-next与compress功能相同，均为自动压缩上传图片的插件，但后者已经很久没有更新了，插件详情见<a href="https://github.com/supine0703/picgo-plugin-compress-next">compress-next的GitHub页</a></p>
-<h4 id="在PicGo的插件设置中搜索compress-next，点击安装">在PicGo的插件设置中搜索compress-next，点击安装</h4>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242047447.webp" alt="image-20241024183840289"></p>
-<h4 id="点击设置——配置plugin">点击设置——配置plugin</h4>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242047074.webp" alt="image-20241024193332167"></p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046012.webp" alt="image-20241024193427565"></p>
-<h5 id="参数配置：">参数配置：</h5>
-<ul>
-<li>Compress Type (过段时间会制作详细对比分析表):
-<ul>
-<li><a href="https://tinypng.com/">tinypng</a>: 无损压缩，需要上传到 tinypng</li>
-<li><a href="https://github.com/imagemin/imagemin">imagemin</a>: 图片压缩不改变后缀名，支持 <code>jpeg</code> 和 <code>png</code>，使用 <a href="https://www.npmjs.com/package/imagemin-mozjpeg">mozjpeg</a> 和 <a href="https://www.npmjs.com/package/imagemin-upng">upng</a></li>
-<li><a href="https://www.npmjs.com/package/imagemin-webp">imagemin-webp</a>: 本地压缩为 webp<br>
-注意：有些图床（比如 <a href="http://sm.ms">sm.ms</a>）不支持 webp 图片格式，会上传失败</li>
-<li><a href="https://www.npmjs.com/package/webp-converter">webp-converter</a>: 同上</li>
-</ul>
-</li>
-<li>Gif Compress Type:
-<ul>
-<li><a href="https://www.npmjs.com/package/webp-converter">webp-converter</a>: 本地有损将 gif 压缩为 webp</li>
-<li><a href="https://www.npmjs.com/package/imagemin-gif2webp">imagemin-gif2webp</a>:</li>
-</ul>
-</li>
-<li>Auto Refresh TinyPng Key Across Months:
-<ul>
-<li>yes: 检测到跨月（与上次使用时年月不同）则自动刷新 TinyPng API Key 的状态</li>
-<li>no: 不检测，但是仍然记录年月</li>
-</ul>
-</li>
-<li>TinyPng API Key:
-<ul>
-<li>在 <a href="https://tinypng.com/developers">developers</a> 中申请</li>
-<li>逗号<code>,</code>隔开，可使用多个 Key 叠加使用次数</li>
-</ul>
-</li>
-</ul>
-<p>根据自己需求配置参数即可，API Key申请教程见下</p>
-<h5 id="API-Key申请">API Key申请</h5>
-<p>进入<a href="https://tinypng.com/developers">TinyPNG – Developer API</a></p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046377.webp" alt="image-20241024194026193"></p>
-<p>输入名字和邮箱，点击Get your API key获取</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046546.webp" alt="image-20241024194319120"></p>
-<p>此时邮箱会受到一条消息，进行相应操作即可完成。</p>
-<p>完成登录后点击DEVELOPER API——Go to dashboard</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242009560.webp" alt="image-20241024200941995"></p>
-<p>在此处添加API即可</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242009717.webp" alt="image-20241024200931134"></p>
-<h4 id="启用插件">启用插件</h4>
-<p>配置完成后点击设置——启用transformer</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242045824.webp" alt="image-20241024193332167"></p>
-<h4 id="PicGo中图床信息">PicGo中图床信息</h4>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242004431.webp" alt="image-20241024200422966"></p>
-<p>仓库名为：GitHub用户名/仓库名，例如：zhangsan/repo</p>
-<p>设定分支名选择main即可</p>
-<p>Token：输入上一步获取的Token即可</p>
-<p>存储路径：在仓库中存储路径+文件名开头部分，可以不填<br>
-例如：</p>
-<p>​	test/test1:文件名为test1+原文件名，路径为main分支中test文件夹</p>
-<p>​	test/test1/：文件名为原文件名，路径为main分支中test/test1文件夹</p>
-<p>自定义域名不填即可</p>
-<div class="note pink info modern"><p>国内可能上传较慢，可以在自定义域名中填写：<a href="https://gcore.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D">https://gcore.jsdelivr.net/gh/用户名/仓库名</a></p>
-</div>
-<p>配置完成后点击确定即可</p>
-<h2 id="typora配置">typora配置</h2>
-<h4 id="下载typora">下载typora</h4>
-<p>官网链接：<a href="https://typoraio.cn/">Typora 官方中文站</a></p>
-<p>这么好用的软件，可惜收费……</p>
-<p>但是！！！！！！！</p>
-<p>这里给个百度网盘链接，懂的都懂o( ❛ᴗ❛ )o：<a href="https://pan.baidu.com/s/1PEpaqcK77aiune1CLNWdvQ?pwd=7s87">https://pan.baidu.com/s/1PEpaqcK77aiune1CLNWdvQ?pwd=7s87</a></p>
-<h4 id="配置信息">配置信息</h4>
-<p>点击左上角文件——偏好设置——图像</p>
-<p>按照图片进行设置</p>
-<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242029641.webp" alt="image-20241024202930146"></p>
-<h2 id="完成配置">完成配置</h2>
-<p>接下来就可以在markdown中插入图片自动实现压缩并上传图片到GitHub了，再也不用担心写好的文章上传博客图片加载丢失的问题了。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>图床</tag>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>pytorch+CUDA安装教程</title>
     <url>/cuda/</url>
     <content><![CDATA[<h1>检查GPU配置</h1>
@@ -236,59 +129,110 @@
       </tags>
   </entry>
   <entry>
-    <title>test</title>
-    <url>/test/</url>
-    <content><![CDATA[<h2 id="数学公式">数学公式</h2>
-<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>L</mi><mrow><mi>c</mi><mi>l</mi><mi>s</mi></mrow></msub><mo>+</mo><msub><mi>L</mi><mrow><mi>b</mi><mi>o</mi><mi>x</mi></mrow></msub><mo>+</mo><msub><mi>L</mi><mtext>mask </mtext></msub></mrow><annotation encoding="application/x-tex">L=L_{c l s}+L_{b o x}+L_{\text {mask }}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mord mathnormal mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">mask </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<p>操作系统</p>
-<h2 id="label">label</h2>
-<p>这里是<mark class="hl-label red">kuaimiaoda</mark></p>
-<h2 id="timeline">timeline</h2>
-<div class="timeline "><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>2022</p>
-</div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>01-02</p>
-</div></div><div class='timeline-item-content'><p>这是测试页面</p>
-</div></div></div>
-<h2 id="series">series</h2>
-<hr>
-<h2 id="note">note</h2>
-<div class="note simple"><p>默认 提示块标签</p>
+    <title>Markdown图床配置</title>
+    <url>/imgs_Markdown/</url>
+    <content><![CDATA[<h1>Markdown图床配置</h1>
+<h2 id="前言">前言</h2>
+<p>本文使用typora，GitHub图床，PicGo实现编辑markdown文本时，写入的图片自动压缩并上传图片，返回可以在任意场景查看的链接，再也不用担心辛辛苦苦写好的文章换个设备照片消失的问题了</p>
+<h2 id="GitHub仓库设置">GitHub仓库设置</h2>
+<h4 id="创建GitHub仓库">创建GitHub仓库</h4>
+<p>自行创建一个用于存储图片的GitHub仓库即可，注意选择public</p>
+<h4 id="获取Token">获取Token</h4>
+<p>点击右上角个人头像选择settings</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242017006.webp" alt="image-20241024201709618"></p>
+<p>左侧选择Developer settings</p>
+<p>personal access token中创建自己的Token</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242022693.webp" alt="image-20241024202230065"></p>
+<p>点击Generate token创建，token只会显示一次，一定要保存好</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/image-20241024205855586.webp" alt="image-20241024205855586"></p>
+<h2 id="PicGo配置">PicGo配置</h2>
+<h3 id="GitHub图床配置">GitHub图床配置</h3>
+<h4 id="下载PicGo">下载PicGo</h4>
+<p>官网链接：<a href="https://picgo.github.io/PicGo-Doc/zh/">PicGo</a></p>
+<p>此为开源项目，自行下载即可</p>
+<h4 id="安装并配置compress-next">安装并配置compress-next</h4>
+<p>compress-next与compress功能相同，均为自动压缩上传图片的插件，但后者已经很久没有更新了，插件详情见<a href="https://github.com/supine0703/picgo-plugin-compress-next">compress-next的GitHub页</a></p>
+<h4 id="在PicGo的插件设置中搜索compress-next，点击安装">在PicGo的插件设置中搜索compress-next，点击安装</h4>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242047447.webp" alt="image-20241024183840289"></p>
+<h4 id="点击设置——配置plugin">点击设置——配置plugin</h4>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242047074.webp" alt="image-20241024193332167"></p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046012.webp" alt="image-20241024193427565"></p>
+<h5 id="参数配置：">参数配置：</h5>
+<ul>
+<li>Compress Type (过段时间会制作详细对比分析表):
+<ul>
+<li><a href="https://tinypng.com/">tinypng</a>: 无损压缩，需要上传到 tinypng</li>
+<li><a href="https://github.com/imagemin/imagemin">imagemin</a>: 图片压缩不改变后缀名，支持 <code>jpeg</code> 和 <code>png</code>，使用 <a href="https://www.npmjs.com/package/imagemin-mozjpeg">mozjpeg</a> 和 <a href="https://www.npmjs.com/package/imagemin-upng">upng</a></li>
+<li><a href="https://www.npmjs.com/package/imagemin-webp">imagemin-webp</a>: 本地压缩为 webp<br>
+注意：有些图床（比如 <a href="http://sm.ms">sm.ms</a>）不支持 webp 图片格式，会上传失败</li>
+<li><a href="https://www.npmjs.com/package/webp-converter">webp-converter</a>: 同上</li>
+</ul>
+</li>
+<li>Gif Compress Type:
+<ul>
+<li><a href="https://www.npmjs.com/package/webp-converter">webp-converter</a>: 本地有损将 gif 压缩为 webp</li>
+<li><a href="https://www.npmjs.com/package/imagemin-gif2webp">imagemin-gif2webp</a>:</li>
+</ul>
+</li>
+<li>Auto Refresh TinyPng Key Across Months:
+<ul>
+<li>yes: 检测到跨月（与上次使用时年月不同）则自动刷新 TinyPng API Key 的状态</li>
+<li>no: 不检测，但是仍然记录年月</li>
+</ul>
+</li>
+<li>TinyPng API Key:
+<ul>
+<li>在 <a href="https://tinypng.com/developers">developers</a> 中申请</li>
+<li>逗号<code>,</code>隔开，可使用多个 Key 叠加使用次数</li>
+</ul>
+</li>
+</ul>
+<p>根据自己需求配置参数即可，API Key申请教程见下</p>
+<h5 id="API-Key申请">API Key申请</h5>
+<p>进入<a href="https://tinypng.com/developers">TinyPNG – Developer API</a></p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046377.webp" alt="image-20241024194026193"></p>
+<p>输入名字和邮箱，点击Get your API key获取</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242046546.webp" alt="image-20241024194319120"></p>
+<p>此时邮箱会受到一条消息，进行相应操作即可完成。</p>
+<p>完成登录后点击DEVELOPER API——Go to dashboard</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242009560.webp" alt="image-20241024200941995"></p>
+<p>在此处添加API即可</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242009717.webp" alt="image-20241024200931134"></p>
+<h4 id="启用插件">启用插件</h4>
+<p>配置完成后点击设置——启用transformer</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242045824.webp" alt="image-20241024193332167"></p>
+<h4 id="PicGo中图床信息">PicGo中图床信息</h4>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242004431.webp" alt="image-20241024200422966"></p>
+<p>仓库名为：GitHub用户名/仓库名，例如：zhangsan/repo</p>
+<p>设定分支名选择main即可</p>
+<p>Token：输入上一步获取的Token即可</p>
+<p>存储路径：在仓库中存储路径+文件名开头部分，可以不填<br>
+例如：</p>
+<p>​	test/test1:文件名为test1+原文件名，路径为main分支中test文件夹</p>
+<p>​	test/test1/：文件名为原文件名，路径为main分支中test/test1文件夹</p>
+<p>自定义域名不填即可</p>
+<div class="note pink info modern"><p>国内可能上传较慢，可以在自定义域名中填写：<a href="https://gcore.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E4%BB%93%E5%BA%93%E5%90%8D">https://gcore.jsdelivr.net/gh/用户名/仓库名</a></p>
 </div>
-<div class="note default simple"><p>default 提示块标签</p>
-</div>
-<div class="note primary simple"><p>primary 提示块标签</p>
-</div>
-<div class="note success simple"><p>success 提示块标签</p>
-</div>
-<div class="note info simple"><p>info 提示块标签</p>
-</div>
-<div class="note warning simple"><p>warning 提示块标签</p>
-</div>
-<div class="note danger simple"><p>danger 提示块标签</p>
-</div>
-<h4 id="自定义">自定义</h4>
-<div class="note icon-padding simple"><i class="note-icon fab fa-cc-visa"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note blue icon-padding simple"><i class="note-icon fas fa-bullhorn"></i><p>2021 年快到了…</p>
-</div>
-<div class="note pink icon-padding simple"><i class="note-icon fas fa-car-crash"></i><p>小心开车 安全至上</p>
-</div>
-<div class="note red icon-padding simple"><i class="note-icon fas fa-fan"></i><p>这是三片呢？还是四片？</p>
-</div>
-<div class="note orange icon-padding simple"><i class="note-icon fas fa-battery-half"></i><p>你是刷 Visa 还是 UnionPay</p>
-</div>
-<div class="note purple icon-padding simple"><i class="note-icon far fa-hand-scissors"></i><p>剪刀石头布</p>
-</div>
-<div class="note green icon-padding simple"><i class="note-icon fab fa-internet-explorer"></i><p>前端最讨厌的浏览器</p>
-</div>
-<h2 id="highlight">highlight</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;helloworld&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="github图床">github图床</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202410241701477.png" alt="image-20241024170107443"></p>
-<h3 id="test压缩">test压缩</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/image-20241024175251447.webp" alt="image-20241024175251447"></p>
+<p>配置完成后点击确定即可</p>
+<h2 id="typora配置">typora配置</h2>
+<h4 id="下载typora">下载typora</h4>
+<p>官网链接：<a href="https://typoraio.cn/">Typora 官方中文站</a></p>
+<p>这么好用的软件，可惜收费……</p>
+<p>但是！！！！！！！</p>
+<p>这里给个百度网盘链接，懂的都懂o( ❛ᴗ❛ )o：<a href="https://pan.baidu.com/s/1PEpaqcK77aiune1CLNWdvQ?pwd=7s87">https://pan.baidu.com/s/1PEpaqcK77aiune1CLNWdvQ?pwd=7s87</a></p>
+<h4 id="配置信息">配置信息</h4>
+<p>点击左上角文件——偏好设置——图像</p>
+<p>按照图片进行设置</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202410242029641.webp" alt="image-20241024202930146"></p>
+<h2 id="完成配置">完成配置</h2>
+<p>接下来就可以在markdown中插入图片自动实现压缩并上传图片到GitHub了，再也不用担心写好的文章上传博客图片加载丢失的问题了。</p>
 ]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>图床</tag>
+        <tag>Markdown</tag>
+      </tags>
   </entry>
 </search>
