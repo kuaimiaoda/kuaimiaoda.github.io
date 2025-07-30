@@ -1,6 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CIGEval——LMM条件图像生成评估框架</title>
+    <url>/CIGEval/</url>
+    <content><![CDATA[<h1>条件图像生成 | Conditional Image Generation</h1>
+<h2 id="什么是条件图像生成">什么是条件图像生成</h2>
+<p>条件图像生成是指根据用户给定的控制信息（文本、图像、布局、视觉信号等）LMM生成符合特定条件的图像的任务。其核心目标是学习从条件输入到目标图像的映射关系，实现可控、高质量的图像生成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301821543.webp" alt="image-20250730182152281"></p>
+<p>上图就是一个简单的例子：给大模型两个图像，要求用subject image这种的墨镜替换source image中的墨镜，右侧是大模型根据要求生成的图像。</p>
+<h2 id="核心关注点">核心关注点</h2>
+<ol>
+<li>
+<p>语义一致性：条件是否达成</p>
+</li>
+<li>
+<p>视觉质量与真实性：生成图像要保证符合物理规律，并且保证图像的光影，色彩等视觉上的质量</p>
+</li>
+<li>
+<p>推理效率与实时性：CPU占用、生成速度（fps）等</p>
+</li>
+<li>
+<p>伦理与安全：防止生成有害内容和侵犯他人隐私的内容等</p>
+</li>
+</ol>
+<h2 id="应用场景与技术价值">应用场景与技术价值</h2>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>应用</th>
+<th>技术需求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电商</td>
+<td>商品图生成，虚拟模特试衣</td>
+<td>图文生成</td>
+</tr>
+<tr>
+<td>游戏/影视</td>
+<td>角色/场景生成/风格化渲染</td>
+<td>个性化定制+图像合成</td>
+</tr>
+<tr>
+<td>工业设计</td>
+<td>产品原型生成、室内布局可视化</td>
+<td>布局控制+视觉信号转换</td>
+</tr>
+<tr>
+<td>医疗/遥感</td>
+<td>医学影像增强、卫星图修复</td>
+<td>图文生成+图像编辑</td>
+</tr>
+<tr>
+<td>自动驾驶</td>
+<td>鸟瞰图生成（DiffAD模型）</td>
+<td>多任务统一表示</td>
+</tr>
+</tbody>
+</table>
+<h1>评估指标或模型</h1>
+<p>如果想要图像生成任务取得较为理想的效果，就需要对LLM生成的图像进行评估，现有的常见评估指标和模型大致分为三大类。</p>
+<h2 id="通用图像生成指标">通用图像生成指标</h2>
+<ol>
+<li>
+<p>FID：通过Inception-v3网络提取特征，计算生成图像与真实图像分布之间的Frechet距离，但无法直接评估语义对齐</p>
+<ul>
+<li>论文链接：<a href="https://arxiv.org/abs/1706.08500">https://arxiv.org/abs/1706.08500</a></li>
+</ul>
+</li>
+<li>
+<p>IS：基于生成图像在分类模型（Inception Net）中的概率分布熵，同时衡量清晰度和多样性</p>
+<ul>
+<li>论文链接：<a href="https://arxiv.org/abs/1801.01973">https://arxiv.org/abs/1801.01973</a></li>
+</ul>
+</li>
+<li>
+<p>KID：FID的无偏估计版本，基于最大均值差异（MMD），只适用于小规模数据集的评估任务</p>
+</li>
+</ol>
+<h2 id="感知质量与真实性指标">感知质量与真实性指标</h2>
+<ol>
+<li>
+<p>LPIPS：通过预训练网络提取特征，计算两图像的感知差异，适用于评估风格迁移、图像修复等任务的视觉自然度评估</p>
+<ul>
+<li>论文链接：<a href="https://arxiv.org/abs/1801.03924">https://arxiv.org/abs/1801.03924</a></li>
+</ul>
+</li>
+<li>
+<p>SSIM：从亮度、对比度、结构三个维度评估图像相似性，仅适合轻度编辑任务的评估</p>
+<ul>
+<li>论文链接：<a href="https://ieeexplore.ieee.org/document/1284395">https://ieeexplore.ieee.org/document/1284395</a></li>
+</ul>
+</li>
+<li>
+<p>NRQM：无需参考图像，直接评估生成图像的清晰度、伪影等</p>
+<ul>
+<li>论文链接：<a href="https://ieeexplore.ieee.org/document/6272356">https://ieeexplore.ieee.org/document/6272356</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="语义一致性评估指标">语义一致性评估指标</h2>
+<ol>
+<li>
+<p>CLIP Score：使用CLIP模型计算文本描述与生成图像的嵌入余弦相似度，评估图文对齐程度，适用于文本引导生成编辑任务</p>
+<ul>
+<li>论文链接：<a href="https://arxiv.org/abs/2104.08718">https://arxiv.org/abs/2104.08718</a></li>
+</ul>
+</li>
+<li>
+<p>DINO-ViT特征相似度：利用自监督ViT模型提取深层特征，计算生成图像与参考图像的语义相似性，适用于对复杂编辑任务中的语义变化敏感的评估任务</p>
+</li>
+</ol>
+<div class="note blue icon-padding flat"><i class="note-icon fa-solid fa-bell"></i><p>当前的评估指标或模型有三个限制：（1）特定于任务（2）可解释性有限（3）缺乏人类对齐</p>
+</div>
+<h1>CIGEval：用于评估条件图像生成的统一代理框架</h1>
+<h2 id="什么是CIGEval？">什么是CIGEval？</h2>
+<p>CIGEval是一个基于 LMM 的自主代理框架，用于评估条件图像生成。该代理框架可以集成先进的 GPT-4o 模型和开源模型</p>
+<p>（1） 在没有人工协助的情况下做出独立决策和判断的自主评估</p>
+<p>（2） 使相对较小的模型能够有效地执行复杂的评估</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301721616.webp" alt="image-20250730172128154"></p>
+<h2 id="研究背景与意义">研究背景与意义</h2>
+<p>传统的图像评估方法往往侧重于图像与给定条件的对齐程度或图像的感知质量，但这些方法往往存在任务特异性、解释性差以及与人类评估相关性不高的问题。特别是在处理涉及多个条件或复杂控制信号的条件图像生成任务时，传统方法往往难以全面、准确地评估生成图像的质量。</p>
+<p>CIGEval克服传统评估方法的局限性，通过整合LMM和多功能工具箱，实现对生成图像的细粒度评估。</p>
+<ul>
+<li>论文地址：<a href="https://arxiv.org/abs/2504.07046">https://arxiv.org/abs/2504.07046</a></li>
+<li>代码仓库：<a href="https://github.com/HITsz-TMG/Agentic-CIGEval">https://github.com/HITsz-TMG/Agentic-CIGEval</a></li>
+</ul>
+<h2 id="CIGEval评估框架">CIGEval评估框架</h2>
+<h3 id="任务定义">任务定义</h3>
+<p>模型对评估任务定义为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>f</mi><mtext>eval </mtext></msub><mrow><mo fence="true">(</mo><mi>I</mi><mo separator="true">,</mo><mi>O</mi><mo separator="true">,</mo><msup><mi>C</mi><mo lspace="0em" rspace="0em">∗</mo></msup><mo fence="true">)</mo></mrow><mo>=</mo><mo stretchy="false">(</mo><mtext>rationale </mtext><mo separator="true">,</mo><mtext> score </mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f_{\text{eval }}\left(I, O, C^{*}\right)=(\text{rationale }, \text{ score })
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1076em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">eval </span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7387em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord text"><span class="mord">rationale </span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord"> score </span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>输入：</p>
+<ul>
+<li>I ：评估指令（如：检查主题一致性）</li>
+<li>O：待评估的生成图像</li>
+<li>C*：条件集合</li>
+</ul>
+<p>输出：</p>
+<ul>
+<li>Rationale：推理过程（自然语言）</li>
+<li>Score：评分（0.0-1.0）</li>
+</ul>
+<h3 id="七类条件生成任务">七类条件生成任务</h3>
+<p>条件图像生成任务中的条件公认被划分为七大类，作者将这七大类任务整合成表中这种比较规整的表示方式作为C*的输入格式。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301735162.webp" alt="image-20250730173531943"></p>
+<h3 id="工具箱">工具箱</h3>
+<p>CIGEval提供一个工具箱包括：</p>
+<ul>
+<li>Grounding——用于定位某一物体</li>
+<li>Highlight——高亮显示某区域</li>
+<li>Difference——检测两幅图的像素级差异</li>
+<li>Scene Gragh——解析图像结构</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301731752.webp" alt="image-20250730173129634"></p>
+<h2 id="模型推理过程">模型推理过程</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301738833.webp" alt="image-20250730173826657"></p>
+<p>模型在推理过程中，首先<mark class="hl-label red">处理输入</mark>的条件、原始图像等多模态信息；再由大模型自主将<mark class="hl-label red">评估目标进行分解</mark>，比如：采用划分细粒度子问题并评估的策略、图像是否按照提示进行、图像编辑是否按照说明进行、图像是否在不更改背景的情况下执行最小编辑、图像中的对象是否跟随提供的主体、图像是否遵循控制引导等；然后在每一个评估目标的评估上，模型必须调用工具箱进行评估，评估过程中也有LLM<mark class="hl-label red">自主学习使用哪些个工具，如何组合使用</mark>；最后将每一个分解后的评估目标得到的评分进行合并，如下式所示，合并过程<mark class="hl-label red">取最低评分</mark>作为这个任务的最终评分，这样设计的意图是任意一个子任务失败，则整体评分都应该低。这一整个评估过程使用的都是GPT-4o模型。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>O</mi><mo>=</mo><mi>min</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><msub><mi>α</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>α</mi><mi>i</mi></msub><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">O = \min\left(\alpha_{1},\ldots,\alpha_{i}\right)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">min</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0037em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></span></p>
+<h2 id="训练集构造与模型微调">训练集构造与模型微调</h2>
+<h3 id="轨迹数据合成">轨迹数据合成</h3>
+<p>将GPT-4o模型得到的结果整合成一个轨迹数据，一个轨迹数据包括四部分：<strong>观察、思考、动作、结果</strong>。以上文提到的替换墨镜任务为例，它的轨迹数据就应该如下图所示，Observation记录的其实就是作者在任务定义公式中的输入，然后一个Thought-Action-Tool Output记录的是大模型自主思考以后划分的一个子问题及对应的评估过程中使用什么工具解决的过程，最后得到一个整体评分，分数应该介于[0,10]。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301747229.webp" alt="image-20250730174749029"></p>
+<h3 id="数据集来源">数据集来源</h3>
+<p>将以上过程应用在ImagenHub数据集上，得到对应的轨迹数据集，同时人工对ImagenHub数据进行评分，剔除掉与人类评估结果差距过大的样本，剩下的高质量轨迹作为小参数量模型微调训练集。因为加入了人工评分的过程，人类评分习惯性使用[0,10]进行评分，所以才设计大模型的评分结果为[0,10]。</p>
+<ul>
+<li>使用ImagenHub数据生成轨迹</li>
+<li>人工对ImageHub数据进行评分</li>
+<li>剔除最终评分与人类评分差异较大的轨迹，剩余样本作为训练集</li>
+</ul>
+<h3 id="Agent-Tuning">Agent Tuning</h3>
+<p>模型：Qwen2-VL-7B / Qwen2.5-VL-7B</p>
+<p>输入：轨迹序列 {o₀, t₁, a₁, o₁, …, tₙ, aₙ, oₙ}</p>
+<p>训练目标：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="script">L</mi><mo>=</mo><mo>−</mo><mi>log</mi><mo>⁡</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi mathvariant="normal">Pr</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><msub><mi>t</mi><mi>i</mi></msub><mo separator="true">,</mo><msub><mi>a</mi><mi>i</mi></msub><mo>∣</mo><msub><mi>c</mi><mi>i</mi></msub><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{L} = -\log \sum_{i=1}^{n} \operatorname{Pr} \left( t_{i}, a_{i} \mid c_{i} \right)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathcal">L</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.9291em;vertical-align:-1.2777em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mord mathrm">Pr</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></span></p>
+<div class="note purple icon-padding flat"><i class="note-icon fa-solid fa-book-open-reader"></i><p>Q：为什么设计轨迹数据？</p>
+<p>A：这样的数据集能记录GPT-4o的思考方式与决策逻辑，让GPT-4o作为“教师模型”训练参数量较小的模型：学习何时调用工具、学习如何使用工具推理输出、学习生成可解释的评分理由，让小模型学习如何思考和决策。</p>
+</div>
+<h2 id="实验结果">实验结果</h2>
+<ol>
+<li>核心实验</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301757307.webp" alt="image-20250730175752075"></p>
+<p>这个表展示了以不同 LMM 为backbone的 7 个条件图像生成任务的 Spearman 相关分数。缩写“IG”、“IE”和“IC”分别代表“图像生成”、“图像编辑”和“图像合成”。“-”表示不适用。</p>
+<p>当使用 GPT-4o 作为底层 LMM 时，CIGEval 在所有 7 个任务中都实现了最先进的性能。它与人类评分者的平均 Spearman 相关性为 0.4625，与人的相关性非常匹配。在涉及多种条件的任务中都有明显提升，例如控制引导生成（Control-guided IG）和多概念组合（Multi-concept IC）任务，在以前的评估指标在这些任务中表现不佳。</p>
+<ol start="2">
+<li>消融实验</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301758633.webp" alt="image-20250730175800496"></p>
+<p>这个表展示了不同配置的 CIGEval （GPT-4o） 中工具的消融研究。</p>
+<p>为了评估 CIGEval 中每种工具的必要性，作者做了一项消融研究。Highlight 无法单独使用，通常伴随着 Grounding 和 Difference，所以不对 Highlight 进行特定的消融。表中结果展示完整的 CIGEval 配置达到了最高的平均分 0.7262。当每个工具被移除时，会观察到明显的下降，每一个工具的设计都必不可少。</p>
+<ol start="3">
+<li>与SOTA的对比结果</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/asus/202507301758645.webp" alt="image-20250730175805465"></p>
+<p>这个表展示了使用基于开源小型 LMM 的 VIEScore 和 CIGEval 跨 7 个任务的 Spearman 相关分数。这里的“Previous SOTA”是指基于 GPT-4o 的 VIEScore。</p>
+<p>表中结果战术了Qwen2-VL-7B-Instruct 和 Qwen2.5-VL-7B-Instruct 在微调后分别由明显的相关性提升，微调后的 7B 模型超越了以前最先进的基于 GPT-4o 的 VIE Score模型。</p>
+<h1>总结与思考</h1>
+<ol>
+<li>评估框架需兼顾全面性与可解释性</li>
+</ol>
+<p>CIGEval的智能体框架通过工具链实现动态问题拆解。评估结合量化指标与可解释路径，避免黑箱评分。</p>
+<div class="note blue modern"><p>相关文献</p>
+<p><em><strong>MMIG-Bench</strong></em>：首个统一多模态图像生成评测基准，通过三层可解释指标评测，实现全面评估模型在文本&amp;图像联合输入下的生成能力，解决传统评估中多模态条件割裂与细粒度对齐缺失的痛点。</p>
+<ul>
+<li>论文地址：<a href="https://arxiv.org/abs/2505.19415">https://arxiv.org/abs/2505.19415</a></li>
+<li>官网：<a href="https://hanghuacs.github.io/MMIG-Bench/">https://hanghuacs.github.io/MMIG-Bench/</a></li>
+</ul>
+</div>
+<ol start="2">
+<li>人类偏好对齐</li>
+</ol>
+<p>CIGEval在七个条件图像生成任务中与人类的评分非常接近挑战：</p>
+<p>（1）主观偏差：人类评分需多标注者共识，受人主观因素影响严重。</p>
+<p>（2）自动化替代：CIGEVAL通过微调7B小模型（Qwen-VL）仅用2.3K轨迹数据即超越GPT-4o基线，证明高质量合成数据可迁移人类偏好。</p>
+<ol start="3">
+<li>小模型潜力</li>
+</ol>
+<p>CIGEVAL证明7B模型经微调可超越GPT-4o，关键在高质量轨迹数据（如工具调用逻辑、人类评分对齐）。</p>
+<div class="note blue modern"><p>相关文献</p>
+<p><em><strong>A*-Decoding</strong></em>：该方法将语言模型解码过程建模为状态空间搜索，应用了 A* 搜索算法，利用一个外部过程监督信号作为启发函数来评估部分推理路径的质量和潜力，从而在固定的计算预算下，智能地优先探索最有希望的推理路径，使参数量较小的LLM能媲美甚至超越大得多的LMM的推理表现。</p>
+<ul>
+<li>论文地址：<a href="https://arxiv.org/abs/2505.13672">https://arxiv.org/abs/2505.13672</a></li>
+</ul>
+</div>
+<ol start="4">
+<li>落地实际应用上</li>
+</ol>
+<p>框架仅评估语义一致性，应拓展更多工具来评估更多指标，如：</p>
+<p>（1）视觉质量：评估图像清晰度，色彩自然度，纹理细节，光影等</p>
+<p>（2）条件符合度：细粒度图文对齐，基于问答的图文一致性评分等</p>
+<p>（3）伦理与安全：过滤有害内容</p>
+<p>多评估指标的结果根据需求对每一指标加不同权重权进行聚合。</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Total Score</mtext><mo>=</mo><mi>α</mi><mo>⋅</mo><mtext>Semantic</mtext><mo>+</mo><mi>β</mi><mo>⋅</mo><mtext>Quality</mtext><mo>+</mo><mi>γ</mi><mo>⋅</mo><mtext>Fidelity</mtext></mrow><annotation encoding="application/x-tex">\text{Total Score} = \alpha \cdot \text{Semantic} + \beta \cdot \text{Quality} + \gamma \cdot \text{Fidelity}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord text"><span class="mord">Total Score</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4445em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord text"><span class="mord">Semantic</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Quality</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Fidelity</span></span></span></span></span></span></p>
+<p>以上就是本片文章的全部内容了，感谢观看！！！</p>
+]]></content>
+      <categories>
+        <category>技术解读</category>
+      </categories>
+      <tags>
+        <tag>LLM</tag>
+        <tag>CIG</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pytorch+CUDA安装教程</title>
     <url>/cuda/</url>
     <content><![CDATA[<h1>检查GPU配置</h1>
