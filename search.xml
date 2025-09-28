@@ -483,4 +483,47 @@
         <tag>Markdown</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Clash for Windows手动安装服务模式</title>
+    <url>/clash%20for%20windows/</url>
+    <content><![CDATA[<div class="note purple icon-padding flat"><i class="note-icon fa-solid fa-bell"></i><p>前言：<br>
+由于实验室服务器必须得挂一个代理这种诡异的方式才能进行连接，这就带来了下一个问题：我要跑一个模型需要从hugging face上进行下载，但是！！！无法访问hugging face。如果不使用 <code>os.environ['http_proxy'] = 'http://IP:端口' </code>来临时使用代理也没找到什么好的方法所以主包也不得不挂两个魔法软件来连接服务器的同时使用代理。</p>
+</div> 
+<h1>大问题！！！</h1>
+<p>clash for windows没办法打开系统代理，TUN模式也需要先安装服务模式才能生效，However，这东西原作者都删库跑路了，虽然也能下载到可以用的版本，但是会出现各种问题需要自己解决，比如说：服务模式装不上……</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202509281614327.webp" alt="image-20250928161422724"></p>
+<h1>解决办法：手动安装</h1>
+<p>既然没办法傻瓜式一键安装，就只能自己动手了。</p>
+<h2 id="进入到service的目录">进入到service的目录</h2>
+<p>打开<code>C:\Program Files\Clash for Windows Service</code>，如果没有就自己创建一个，如果有把文件夹里所有文件全部delete。</p>
+<h2 id="复制安装文件">复制安装文件</h2>
+<p>打开clash for windows安装目录，再进入<code>resource\static\files\win\x64\service</code>，复制<code>clash-service.exe</code>和<code>service.exe</code>到上一步的Clash for Windows Service目录中。</p>
+<p>再进入<code>resource\static\files\win\common</code>，复制<code>service.yml</code>到上一步的Clash for Windows Service目录中。</p>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202509281642432.webp" alt="image-20250928164233058"></p>
+<p>此时应该包含这三个文件。</p>
+<h2 id="安装">安装</h2>
+<p>以管理员身份打开CMD，运行以下命令以安装service并启动。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd C:\Program Files\Clash for Windows Service</span><br><span class="line">service.exe install</span><br><span class="line">service.exe start</span><br></pre></td></tr></table></figure>
+<p><img src="https://gcore.jsdelivr.net/gh/kuaimiaoda/random-menu/xxx/honor/202509281647854.webp" alt="image-20250928164755433"></p>
+<p>（ps：由于主包当时忘了截图了，所以借用一张图[emoji]）</p>
+<h2 id="重启">重启</h2>
+<p>重启clash for windows，检查服务模式（Service Mode）旁边的小地球图标，变成绿色说明已经安装成功。</p>
+<h1>Q&amp;A</h1>
+<h2 id="1-执行service-exe-install时出错">1.执行<code>service.exe install</code>时出错</h2>
+<p>按照正常流程执行但是出现：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">C:\Program Files\Clash for Windows Service&gt;service.exe install</span><br><span class="line">2025-09-28 15:40:19,696 INFO  - Installing the service with id &#x27;Clash Core Service&#x27;</span><br><span class="line">Service with id &#x27;Clash Core Service&#x27; already exists</span><br><span class="line">To install the service, delete the existing one or change service Id in the configuration file</span><br><span class="line">2025-09-28 15:40:19,698 FATAL - Unhandled exception</span><br><span class="line">System.Exception: Installation failure: Service with id &#x27;Clash Core Service&#x27; already exists</span><br><span class="line">   在 WinSW.Program.&lt;Run&gt;g__Install|2_0(&lt;&gt;c__DisplayClass2_0&amp; )</span><br><span class="line">   在 WinSW.Program.Run(String[] argsArray, IWinSWConfiguration descriptor)</span><br><span class="line">   在 WinSW.Program.Main(String[] args)</span><br><span class="line">System.Exception: Installation failure: Service with id &#x27;Clash Core Service&#x27; already exists</span><br><span class="line">   在 WinSW.Program.&lt;Run&gt;g__Install|2_0(&lt;&gt;c__DisplayClass2_0&amp; )</span><br><span class="line">   在 WinSW.Program.Run(String[] argsArray, IWinSWConfiguration descriptor)</span><br><span class="line">   在 WinSW.Program.Main(String[] args)</span><br></pre></td></tr></table></figure>
+<p>A：这是由于系统中已经存在一个名为“Clash Core Service”的服务，导致无法重复安装。以管理员身份执行以下命令删除已存在的服务就好了。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sc delete &quot;Clash Core Service&quot;</span><br></pre></td></tr></table></figure>
+<p>看见类似于<code>[SC] DeleteService SUCCESS</code>的提示语就说明成功了，再次运行<code>service.exe install</code>。</p>
+<h2 id="2-重启clash图标没有变成绿色">2.重启clash图标没有变成绿色</h2>
+<p>可以开启TUN和系统代理了，但是图标没有变成绿色，实际可能也没有启动代理</p>
+<p>A：重启电脑就可以正常使用了。</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Clash</tag>
+      </tags>
+  </entry>
 </search>
